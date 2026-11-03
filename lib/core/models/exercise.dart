@@ -27,7 +27,9 @@ enum MuscleGroup {
 
 enum ExerciseEquipment {
   dumbbells('Mancuernas'),
+  barbell('Barra con discos'),
   bench('Banco'),
+  resistanceBand('Bandas de resistencia'),
   pullUpBar('Barra de dominadas'),
   cableMachine('Polea alta'),
   legPressMachine('Prensa de piernas'),

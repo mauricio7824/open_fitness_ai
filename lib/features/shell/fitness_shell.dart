@@ -5,6 +5,7 @@ import '../home/home_page.dart';
 import '../exercises/exercises_page.dart';
 import '../progress/progress_page.dart';
 import '../workouts/workouts_page.dart';
+import '../profile/profile_page.dart';
 
 class FitnessShell extends StatefulWidget {
   const FitnessShell({super.key, required this.controller});
@@ -52,6 +53,12 @@ class _FitnessShellState extends State<FitnessShell> {
         ],
       ),
       actions: [
+        IconButton(
+          key: const ValueKey('open-profile'),
+          tooltip: 'Perfil y equipamiento',
+          onPressed: () => openProfile(context, widget.controller),
+          icon: const Icon(Icons.person_outline),
+        ),
         PopupMenuButton<ThemeMode>(
           tooltip: 'Cambiar apariencia',
           icon: const Icon(Icons.contrast_rounded),
@@ -80,7 +87,10 @@ class _FitnessShellState extends State<FitnessShell> {
         children: [
           HomePage(controller: widget.controller, onWorkouts: () => _select(1)),
           WorkoutsPage(controller: widget.controller),
-          ExercisesPage(catalog: widget.controller.catalog),
+          ExercisesPage(
+            catalog: widget.controller.catalog,
+            controller: widget.controller,
+          ),
           ProgressPage(
             controller: widget.controller,
             onWorkouts: () => _select(1),

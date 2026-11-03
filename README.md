@@ -2,6 +2,10 @@
 
 Aplicación Flutter orientada a Android: entrenamiento físico y seguimiento personal en español, con Material Design 3. La fase 2 añade una biblioteca local de ejercicios.
 
+La fase 3 incorpora perfil deportivo e inventario de equipamiento editables y persistentes. La configuración inicial puede omitirse y retomarse desde el icono de perfil de la barra superior. La biblioteca identifica compatibilidad por material, ofrece filtros opcionales por inventario/modalidades preferidas y limita las alternativas al equipo declarado. Se conservan las cuatro pestañas, los temas y el catálogo de 18 ejercicios. Consulta los [modelos, reglas de personalización y archivos modificados](docs/personalization.md).
+
+Verificación final de la fase 3: `flutter analyze --no-pub` sin incidencias y `flutter test --no-pub` con **97 pruebas aprobadas** (61 anteriores y 36 nuevas), ambos con código de salida 0. Se utilizó el entorno local ya preparado; no se añadieron dependencias ni se modificó el SDK.
+
 ## Funciones disponibles
 
 - **Inicio:** acceso a la sesión de hoy, continuación de una sesión abierta y estadísticas calculadas a partir del historial real.

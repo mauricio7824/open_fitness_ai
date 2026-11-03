@@ -176,6 +176,7 @@ class _WorkoutSessionPageState extends State<WorkoutSessionPage> {
                                 context,
                                 widget.workout.moves[i].exercise,
                                 catalog: widget.controller.catalog,
+                                controller: widget.controller,
                               ),
                               icon: const Icon(Icons.info_outline, size: 18),
                               label: const Text('Ver técnica'),
