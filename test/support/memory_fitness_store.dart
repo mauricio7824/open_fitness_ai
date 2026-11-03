@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:open_fitness_ai/core/data/fitness_store.dart';
+import 'package:open_fitness_ai/core/models/fitness_models.dart';
+
+class MemoryFitnessStore implements FitnessStore {
+  StoredFitnessData data = const StoredFitnessData();
+  bool failRead = false;
+  bool failWrite = false;
+  int recordWrites = 0;
+
+  @override
+  Future<StoredFitnessData> load() async {
+    if (failRead) throw StateError('Read failed');
+    return data;
+  }
+
+  @override
+  Future<void> saveTheme(ThemeMode mode) async {
+    if (failWrite) throw StateError('Write failed');
+    data = StoredFitnessData(themeMode: mode, records: data.records);
+  }
+
+  @override
+  Future<void> saveRecords(List<WorkoutRecord> records) async {
+    if (failWrite) throw StateError('Write failed');
+    recordWrites++;
+    data = StoredFitnessData(
+      themeMode: data.themeMode,
+      records: List.of(records),
+    );
+  }
+}
