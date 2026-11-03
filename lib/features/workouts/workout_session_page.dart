@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/models/fitness_models.dart';
 import '../../core/state/fitness_controller.dart';
 import '../../shared/widgets/fitness_widgets.dart';
-import '../exercises/exercises_page.dart';
+import '../exercises/exercise_detail_page.dart';
 
 Future<void> openWorkout(
   BuildContext context,
@@ -175,6 +175,7 @@ class _WorkoutSessionPageState extends State<WorkoutSessionPage> {
                               onPressed: () => showExerciseDetails(
                                 context,
                                 widget.workout.moves[i].exercise,
+                                catalog: widget.controller.catalog,
                               ),
                               icon: const Icon(Icons.info_outline, size: 18),
                               label: const Text('Ver técnica'),

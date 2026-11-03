@@ -1,17 +1,4 @@
-class Exercise {
-  const Exercise({
-    required this.id,
-    required this.name,
-    required this.group,
-    required this.equipment,
-    required this.instructions,
-  });
-  final String id;
-  final String name;
-  final String group;
-  final String equipment;
-  final String instructions;
-}
+import 'exercise.dart';
 
 class WorkoutMove {
   const WorkoutMove(this.exercise, this.prescription);

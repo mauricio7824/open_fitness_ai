@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../data/fitness_store.dart';
+import '../data/exercise_repository.dart';
+import '../data/fitness_catalog.dart';
+import '../models/exercise.dart';
 import '../models/fitness_models.dart';
 
 class FitnessController extends ChangeNotifier {
-  FitnessController(this._store);
+  FitnessController(this._store, {ExerciseRepository? exerciseRepository})
+    : _exerciseRepository = exerciseRepository ?? AssetExerciseRepository();
   final FitnessStore _store;
+  final ExerciseRepository _exerciseRepository;
+  ExerciseCatalog? _catalog;
+  List<Workout> _workouts = const [];
+  ExerciseCatalog get catalog => _catalog!;
+  List<Workout> get workouts => _workouts;
   ThemeMode themeMode = ThemeMode.system;
   List<WorkoutRecord> _records = [];
   WorkoutSession? _activeSession;
@@ -35,6 +44,10 @@ class FitnessController extends ChangeNotifier {
     _notify();
     try {
       final data = await _store.load();
+      final catalog = await _exerciseRepository.load();
+      final workouts = buildWorkouts(catalog);
+      _catalog = catalog;
+      _workouts = workouts;
       themeMode = data.themeMode;
       _records = List.of(data.records)
         ..sort((a, b) => b.completedAt.compareTo(a.completedAt));

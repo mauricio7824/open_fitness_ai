@@ -3,9 +3,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:open_fitness_ai/app.dart';
 
 import 'support/memory_fitness_store.dart';
+import 'support/test_exercise_catalog.dart';
+
+import 'package:open_fitness_ai/core/models/exercise.dart';
+import 'package:open_fitness_ai/features/exercises/exercise_filter.dart';
 
 Future<void> openApp(WidgetTester tester, MemoryFitnessStore store) async {
-  await tester.pumpWidget(OpenFitnessApp(store: store));
+  await tester.pumpWidget(
+    OpenFitnessApp(store: store, exerciseRepository: TestExerciseRepository()),
+  );
   await tester.pumpAndSettle();
 }
 
@@ -16,7 +22,21 @@ Future<void> selectTab(WidgetTester tester, String key) async {
 
 Future<void> tapVisible(WidgetTester tester, Finder finder) async {
   await tester.ensureVisible(finder);
+  await tester.pumpAndSettle();
   await tester.tap(finder);
+  await tester.pumpAndSettle();
+}
+
+Future<void> selectFilter(
+  WidgetTester tester,
+  String key,
+  String option,
+) async {
+  await tapVisible(tester, find.byKey(ValueKey(key)));
+  final item = find.text(option).last;
+  await tester.ensureVisible(item);
+  await tester.pumpAndSettle();
+  await tester.tap(item);
   await tester.pumpAndSettle();
 }
 
@@ -41,8 +61,7 @@ void main() {
     expect(find.text('gluteos'), findsOneWidget);
     await tapVisible(tester, find.text('Puente de glúteos'));
     expect(find.text('Cómo realizarlo'), findsOneWidget);
-    await tester.tap(find.text('Entendido'));
-    await tester.pumpAndSettle();
+    await tapVisible(tester, find.text('Entendido'));
     await selectTab(tester, 'nav-home');
     expect(find.text('Tu próximo paso empieza hoy'), findsOneWidget);
   });
@@ -52,15 +71,18 @@ void main() {
   ) async {
     await openApp(tester, MemoryFitnessStore());
     await selectTab(tester, 'nav-exercises');
-    await tester.tap(find.widgetWithText(ChoiceChip, 'Zona media'));
-    await tester.pumpAndSettle();
-    expect(find.text('2 ejercicios'), findsOneWidget);
-    await tester.enterText(find.byType(TextField), 'sentadilla');
+    await selectFilter(tester, 'filter-muscle', 'Zona media');
+    final count = const ExerciseFilter(muscle: MuscleGroup.core)
+        .apply(testExerciseCatalog.exercises)
+        .length;
+    expect(find.text('$count ejercicios'), findsOneWidget);
+    await tester.ensureVisible(find.byType(TextField));
+    await tester.enterText(find.byType(TextField), 'inexistente');
     await tester.pumpAndSettle();
     expect(find.text('Sin coincidencias'), findsOneWidget);
-    await tester.tap(find.byTooltip('Borrar búsqueda'));
+    await tapVisible(tester, find.byTooltip('Borrar búsqueda'));
     await tester.pumpAndSettle();
-    expect(find.text('2 ejercicios'), findsOneWidget);
+    expect(find.text('$count ejercicios'), findsOneWidget);
   });
 
   testWidgets(

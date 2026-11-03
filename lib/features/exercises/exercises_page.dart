@@ -1,69 +1,35 @@
 import 'package:flutter/material.dart';
 
-import '../../core/data/fitness_catalog.dart';
-import '../../core/models/fitness_models.dart';
+import '../../core/models/exercise.dart';
 import '../../shared/widgets/fitness_widgets.dart';
-
-void showExerciseDetails(BuildContext context, Exercise exercise) {
-  showModalBottomSheet<void>(
-    context: context,
-    showDragHandle: true,
-    isScrollControlled: true,
-    useSafeArea: true,
-    constraints: const BoxConstraints(maxWidth: 640),
-    builder: (context) => SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(exercise.name, style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 8),
-          Text('${exercise.group} · ${exercise.equipment}'),
-          const SizedBox(height: 24),
-          Text(
-            'Cómo realizarlo',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Text(exercise.instructions),
-          const SizedBox(height: 24),
-          Align(
-            alignment: Alignment.centerRight,
-            child: FilledButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Entendido'),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
+import 'exercise_detail_page.dart';
+import 'exercise_filter.dart';
 
 class ExercisesPage extends StatefulWidget {
-  const ExercisesPage({super.key});
+  const ExercisesPage({super.key, required this.catalog});
+  final ExerciseCatalog catalog;
   @override
   State<ExercisesPage> createState() => _ExercisesPageState();
 }
 
 class _ExercisesPageState extends State<ExercisesPage> {
   final _search = TextEditingController();
-  String _group = 'Todos';
+  MuscleGroup? _muscle;
+  ExerciseModality? _modality;
+  String _equipment = 'all';
 
-  String _normalize(String value) {
-    var result = value.toLowerCase().trim();
-    for (final entry in const {
-      'á': 'a',
-      'é': 'e',
-      'í': 'i',
-      'ó': 'o',
-      'ú': 'u',
-    }.entries) {
-      result = result.replaceAll(entry.key, entry.value);
-    }
-    return result;
-  }
+  bool get _hasFilters =>
+      _search.text.isNotEmpty ||
+      _muscle != null ||
+      _modality != null ||
+      _equipment != 'all';
+
+  void _reset() => setState(() {
+    _search.clear();
+    _muscle = null;
+    _modality = null;
+    _equipment = 'all';
+  });
 
   @override
   void dispose() {
@@ -73,20 +39,45 @@ class _ExercisesPageState extends State<ExercisesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final filtered = exercises
+    final items = widget.catalog.exercises;
+    final muscles = MuscleGroup.values
         .where(
-          (exercise) =>
-              (_group == 'Todos' || exercise.group == _group) &&
-              _normalize('${exercise.name} ${exercise.group}')
-                  .contains(_normalize(_search.text)),
+          (muscle) => items.any(
+            (item) =>
+                item.primaryMuscles.contains(muscle) ||
+                item.secondaryMuscles.contains(muscle),
+          ),
         )
         .toList();
+    final equipment = ExerciseEquipment.values
+        .where(
+          (equipment) =>
+              items.any((item) => item.requiredEquipment.contains(equipment)),
+        )
+        .toList();
+    final filter = ExerciseFilter(
+      query: _search.text,
+      muscle: _muscle,
+      modality: _modality,
+      withoutEquipment: _equipment == 'none',
+      equipment: equipment.where((item) => item.name == _equipment).firstOrNull,
+    );
+    final filtered = filter.apply(items);
     return PageContent(
       children: [
         const PageHeading(
           title: 'Explora los ejercicios',
           subtitle: 'Conoce cada movimiento antes de empezar.',
         ),
+        const Wrap(
+          spacing: 8,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Icon(Icons.offline_pin_outlined, size: 18),
+            Text('Biblioteca disponible sin conexión'),
+          ],
+        ),
+        const SizedBox(height: 16),
         TextField(
           controller: _search,
           onChanged: (_) => setState(() {}),
@@ -103,69 +94,140 @@ class _ExercisesPageState extends State<ExercisesPage> {
           ),
         ),
         const SizedBox(height: 16),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final group in [
-              'Todos',
-              'Piernas',
-              'Tren superior',
-              'Zona media',
-            ])
-              ChoiceChip(
-                label: Text(group),
-                selected: _group == group,
-                onSelected: (_) => setState(() => _group = group),
-              ),
-          ],
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final width = constraints.maxWidth >= 720
+                ? (constraints.maxWidth - 32) / 3
+                : constraints.maxWidth;
+            return Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              children: [
+                SizedBox(
+                  width: width,
+                  child: _LibraryFilter<MuscleGroup?>(
+                    key: const ValueKey('filter-muscle'),
+                    label: 'Grupo muscular',
+                    value: _muscle,
+                    entries: {
+                      null: 'Todos los músculos',
+                      for (final muscle in muscles) muscle: muscle.label,
+                    },
+                    onChanged: (value) => setState(() => _muscle = value),
+                  ),
+                ),
+                SizedBox(
+                  width: width,
+                  child: _LibraryFilter<ExerciseModality?>(
+                    key: const ValueKey('filter-modality'),
+                    label: 'Modalidad',
+                    value: _modality,
+                    entries: {
+                      null: 'Todas las modalidades',
+                      for (final modality in ExerciseModality.values)
+                        modality: modality.label,
+                    },
+                    onChanged: (value) => setState(() => _modality = value),
+                  ),
+                ),
+                SizedBox(
+                  width: width,
+                  child: _LibraryFilter<String>(
+                    key: const ValueKey('filter-equipment'),
+                    label: 'Equipo necesario',
+                    value: _equipment,
+                    entries: {
+                      'all': 'Cualquier equipo',
+                      'none': 'Sin material',
+                      for (final item in equipment) item.name: item.label,
+                    },
+                    onChanged: (value) =>
+                        setState(() => _equipment = value ?? 'all'),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
+        const SizedBox(height: 12),
+        const Text(
+          'El grupo incluye músculos principales y secundarios. El equipo opcional no limita los resultados.',
+        ),
+        if (_hasFilters)
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton.icon(
+              key: const ValueKey('reset-filters'),
+              onPressed: _reset,
+              icon: const Icon(Icons.filter_alt_off_outlined),
+              label: const Text('Limpiar filtros'),
+            ),
+          ),
         const SizedBox(height: 20),
         Text(
-          '${filtered.length} ejercicios',
+          '${filtered.length} ${filtered.length == 1 ? 'ejercicio' : 'ejercicios'}',
+          key: const ValueKey('exercise-count'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(height: 12),
         if (filtered.isEmpty)
-          const EmptyState(
+          EmptyState(
             icon: Icons.search_off,
             title: 'Sin coincidencias',
-            message: 'Prueba con otro nombre o cambia el grupo muscular.',
+            message: 'Prueba con otro nombre o cambia los filtros.',
+            action: OutlinedButton(
+              onPressed: _reset,
+              child: const Text('Mostrar todos'),
+            ),
           )
         else
           AdaptiveCards(
             children: [
               for (final exercise in filtered)
                 Card(
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(24),
-                    onTap: () => showExerciseDetails(context, exercise),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.accessibility_new_rounded,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            exercise.name,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(exercise.group),
-                          const SizedBox(height: 4),
-                          Text(exercise.equipment),
-                          const SizedBox(height: 16),
-                          const Row(
-                            children: [
-                              Expanded(child: Text('Ver técnica')),
-                              Icon(Icons.arrow_forward_rounded),
-                            ],
-                          ),
-                        ],
+                  child: Semantics(
+                    button: true,
+                    child: InkWell(
+                      key: ValueKey('exercise-${exercise.id}'),
+                      borderRadius: BorderRadius.circular(24),
+                      onTap: () => showExerciseDetails(
+                        context,
+                        exercise,
+                        catalog: widget.catalog,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.accessibility_new_rounded,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              exercise.name,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              exercise.primaryMuscles
+                                  .map((muscle) => muscle.label)
+                                  .join(' · '),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(exercise.equipmentLabel),
+                            const SizedBox(height: 8),
+                            Text(exercise.difficulty.label),
+                            const SizedBox(height: 16),
+                            const Row(
+                              children: [
+                                Expanded(child: Text('Ver técnica')),
+                                Icon(Icons.arrow_forward_rounded),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -175,4 +237,32 @@ class _ExercisesPageState extends State<ExercisesPage> {
       ],
     );
   }
+}
+
+class _LibraryFilter<T> extends StatelessWidget {
+  const _LibraryFilter({
+    super.key,
+    required this.label,
+    required this.value,
+    required this.entries,
+    required this.onChanged,
+  });
+  final String label;
+  final T value;
+  final Map<T, String> entries;
+  final ValueChanged<T?> onChanged;
+  @override
+  Widget build(BuildContext context) => DropdownButtonFormField<T>(
+    // Recreate the field when its controlled value changes (including reset).
+    key: ValueKey('$label:$value'),
+    initialValue: value,
+    isExpanded: true,
+    itemHeight: null,
+    decoration: InputDecoration(labelText: label),
+    items: [
+      for (final entry in entries.entries)
+        DropdownMenuItem<T>(value: entry.key, child: Text(entry.value)),
+    ],
+    onChanged: onChanged,
+  );
 }
