@@ -61,7 +61,16 @@ class _ExercisesPageState extends State<ExercisesPage> {
           ),
         )
         .toList();
-    final equipment = ExerciseEquipment.values
+    final equipment = widget.controller?.equipmentCatalog.equipment
+        .where(
+          (equipment) => items.any(
+            (item) => item.equipmentRequirements.allOf.any(
+              (group) => group.any((option) => option.contains(equipment.id)),
+            ),
+          ),
+        )
+        .toList();
+    final legacyEquipment = ExerciseEquipment.values
         .where(
           (equipment) =>
               items.any((item) => item.requiredEquipment.contains(equipment)),
@@ -72,7 +81,9 @@ class _ExercisesPageState extends State<ExercisesPage> {
       muscle: _muscle,
       modality: _modality,
       withoutEquipment: _equipment == 'none',
-      equipment: equipment.where((item) => item.name == _equipment).firstOrNull,
+      equipmentId: _equipment == 'all' || _equipment == 'none'
+          ? null
+          : _equipment,
       inventory: inventory,
       compatibleOnly: _compatibleOnly,
       preferredModalities: _preferredOnly
@@ -156,7 +167,11 @@ class _ExercisesPageState extends State<ExercisesPage> {
                     entries: {
                       'all': 'Cualquier equipo',
                       'none': 'Sin material',
-                      for (final item in equipment) item.name: item.label,
+                      if (equipment != null)
+                        for (final item in equipment) item.id: item.nameEs,
+                      if (equipment == null)
+                        for (final item in legacyEquipment)
+                          item.name: item.label,
                     },
                     onChanged: (value) =>
                         setState(() => _equipment = value ?? 'all'),
@@ -265,11 +280,24 @@ class _ExercisesPageState extends State<ExercisesPage> {
                                   .join(' · '),
                             ),
                             const SizedBox(height: 4),
-                            Text(exercise.equipmentLabel),
+                            Text(
+                              exercise.equipmentRequirements.describe(
+                                (id) =>
+                                    widget.controller?.equipmentCatalog.label(
+                                      id,
+                                    ) ??
+                                    ExerciseEquipment.values
+                                        .where((item) => item.name == id)
+                                        .firstOrNull
+                                        ?.label ??
+                                    id,
+                              ),
+                            ),
                             const SizedBox(height: 8),
                             EquipmentCompatibility(
                               exercise: exercise,
                               inventory: inventory,
+                              catalog: widget.controller?.equipmentCatalog,
                             ),
                             const SizedBox(height: 8),
                             Text(exercise.difficulty.label),

@@ -10,7 +10,11 @@ import 'package:open_fitness_ai/features/exercises/exercise_filter.dart';
 
 Future<void> openApp(WidgetTester tester, MemoryFitnessStore store) async {
   await tester.pumpWidget(
-    OpenFitnessApp(store: store, exerciseRepository: TestExerciseRepository()),
+    OpenFitnessApp(
+      store: store,
+      exerciseRepository: TestExerciseRepository(),
+      equipmentRepository: TestEquipmentRepository(),
+    ),
   );
   await tester.pumpAndSettle();
 }
@@ -25,6 +29,15 @@ Future<void> tapVisible(WidgetTester tester, Finder finder) async {
   await tester.pumpAndSettle();
   await tester.tap(finder);
   await tester.pumpAndSettle();
+}
+
+Future<void> tapInventoryItem(WidgetTester tester, String id) async {
+  final search = find.byKey(const ValueKey('inventory-search'));
+  await tester.ensureVisible(search);
+  await tester.pumpAndSettle();
+  await tester.enterText(search, testEquipmentCatalog.label(id));
+  await tester.pumpAndSettle();
+  await tapVisible(tester, find.byKey(ValueKey('inventory-$id')));
 }
 
 Future<void> selectFilter(

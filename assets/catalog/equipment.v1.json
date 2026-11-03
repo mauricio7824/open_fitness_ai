@@ -1,0 +1,1647 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": 1,
+  "equipment": [
+    {
+      "id": "bodyweight",
+      "nameEs": "Peso corporal",
+      "nameEn": "Body weight",
+      "category": "environment",
+      "kind": "bodyweight",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Autocarga"
+      ],
+      "description": "Uso del propio cuerpo como resistencia, sin implementos obligatorios.",
+      "variants": [
+        "Apoyos en suelo"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "wall",
+      "nameEs": "Pared",
+      "nameEn": "Wall",
+      "category": "environment",
+      "kind": "environment",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Muro firme"
+      ],
+      "description": "Superficie vertical fija para ejercicios con apoyo.",
+      "variants": [
+        "Superficie lisa"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "floor",
+      "nameEs": "Suelo firme",
+      "nameEn": "Firm floor",
+      "category": "environment",
+      "kind": "environment",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Superficie de suelo"
+      ],
+      "description": "Base horizontal estable para movimientos sin material.",
+      "variants": [
+        "Interior",
+        "Exterior"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "stairs",
+      "nameEs": "Escaleras",
+      "nameEn": "Stairs",
+      "category": "environment",
+      "kind": "environment",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Escalinata"
+      ],
+      "description": "Peldaños fijos para desplazamientos y apoyos.",
+      "variants": [
+        "Tramo con pasamanos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "chair",
+      "nameEs": "Silla estable",
+      "nameEn": "Stable chair",
+      "category": "environment",
+      "kind": "environment",
+      "modalities": [
+        "home"
+      ],
+      "synonyms": [
+        "Asiento firme"
+      ],
+      "description": "Asiento fijo sin ruedas; no se presupone equivalente a un banco de entrenamiento.",
+      "variants": [
+        "Con respaldo"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "dumbbells",
+      "nameEs": "Mancuernas",
+      "nameEn": "Dumbbells",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Pesas de mano"
+      ],
+      "description": "Cargas sujetas individualmente con las manos.",
+      "variants": [
+        "Fijas",
+        "Ajustables"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "barbell",
+      "nameEs": "Barra con discos",
+      "nameEn": "Loaded barbell",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Barra libre cargada"
+      ],
+      "description": "Conjunto de barra libre y discos; no implica disponer de una máquina Smith.",
+      "variants": [
+        "Barra recta cargada"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "weight-plates",
+      "nameEs": "Discos de peso",
+      "nameEn": "Weight plates",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Platos de carga"
+      ],
+      "description": "Discos individuales para cargar implementos compatibles; no incluyen una barra.",
+      "variants": [
+        "Hierro",
+        "Recubiertos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "kettlebell",
+      "nameEs": "Pesa rusa",
+      "nameEn": "Kettlebell",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Kettlebells"
+      ],
+      "description": "Carga compacta con asa superior.",
+      "variants": [
+        "Fija",
+        "Ajustable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "medicine-ball",
+      "nameEs": "Balón medicinal",
+      "nameEn": "Medicine ball",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Pelota medicinal"
+      ],
+      "description": "Balón lastrado para movimientos de fuerza o lanzamiento según su diseño.",
+      "variants": [
+        "Con rebote",
+        "Con asas"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "slam-ball",
+      "nameEs": "Balón de golpeo",
+      "nameEn": "Slam ball",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Pelota de golpeo"
+      ],
+      "description": "Balón diseñado para impactos contra el suelo; no se asume intercambiable con cualquier balón medicinal.",
+      "variants": [
+        "Sin rebote"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "sandbag",
+      "nameEs": "Saco lastrado",
+      "nameEn": "Training sandbag",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Saco de arena"
+      ],
+      "description": "Carga flexible con relleno y puntos de agarre.",
+      "variants": [
+        "Con asas",
+        "Tipo cilíndrico"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "weighted-vest",
+      "nameEs": "Chaleco lastrado",
+      "nameEn": "Weighted vest",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Chaleco de peso"
+      ],
+      "description": "Prenda que permite añadir carga al cuerpo.",
+      "variants": [
+        "Carga fija",
+        "Carga ajustable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "ankle-weights",
+      "nameEs": "Tobilleras lastradas",
+      "nameEn": "Ankle weights",
+      "category": "freeWeights",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Pesas de tobillo"
+      ],
+      "description": "Cargas que se fijan alrededor de los tobillos.",
+      "variants": [
+        "Fijas",
+        "Ajustables"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "steel-club",
+      "nameEs": "Maza corta de entrenamiento",
+      "nameEn": "Steel club",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Clubbell"
+      ],
+      "description": "Implemento alargado con masa desplazada hacia un extremo.",
+      "variants": [
+        "Individual",
+        "Par"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "steel-mace",
+      "nameEs": "Maza larga de entrenamiento",
+      "nameEn": "Steel mace",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Macebell"
+      ],
+      "description": "Implemento de mango largo y carga concentrada en la cabeza.",
+      "variants": [
+        "Carga fija"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "training-hammer",
+      "nameEs": "Martillo de entrenamiento",
+      "nameEn": "Training sledgehammer",
+      "category": "freeWeights",
+      "kind": "implement",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Martillo lastrado"
+      ],
+      "description": "Martillo destinado a entrenamiento con superficie de impacto apropiada.",
+      "variants": [
+        "Distintos pesos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "bench",
+      "nameEs": "Banco",
+      "nameEn": "Weight bench",
+      "category": "racks",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Banco de pesas"
+      ],
+      "description": "Apoyo de entrenamiento; sus ajustes deben comprobarse según el ejercicio.",
+      "variants": [
+        "Plano",
+        "Ajustable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "power-rack",
+      "nameEs": "Jaula de potencia",
+      "nameEn": "Power rack",
+      "category": "racks",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Rack de potencia"
+      ],
+      "description": "Estructura para sostener barras y colocar seguros; no implica poleas incluidas.",
+      "variants": [
+        "Con seguros",
+        "Con accesorios declarados por separado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "squat-stand",
+      "nameEs": "Soporte de sentadillas",
+      "nameEn": "Squat stand",
+      "category": "racks",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Soporte para barra"
+      ],
+      "description": "Soporte para colocar una barra libre entre movimientos.",
+      "variants": [
+        "Dos postes",
+        "Estructura unida"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "safety-stands",
+      "nameEs": "Caballetes de seguridad",
+      "nameEn": "Safety stands",
+      "category": "racks",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Soportes de seguridad independientes"
+      ],
+      "description": "Apoyos destinados a recibir una barra a una altura ajustada.",
+      "variants": [
+        "Altura regulable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "preacher-bench",
+      "nameEs": "Banco predicador",
+      "nameEn": "Preacher curl bench",
+      "category": "racks",
+      "kind": "support",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Banco Scott"
+      ],
+      "description": "Apoyo inclinado para los brazos durante movimientos de flexión de codo.",
+      "variants": [
+        "Asiento regulable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "roman-chair",
+      "nameEs": "Banco de hiperextensiones",
+      "nameEn": "Back extension bench",
+      "category": "racks",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Silla romana"
+      ],
+      "description": "Soporte de pelvis y piernas para extensiones de tronco.",
+      "variants": [
+        "Inclinado",
+        "Horizontal"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "ghd",
+      "nameEs": "Desarrollador de glúteos e isquiotibiales",
+      "nameEn": "Glute ham developer",
+      "category": "racks",
+      "kind": "support",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Banco GHD"
+      ],
+      "description": "Soporte con almohadillas y fijación de pies para movimientos específicos.",
+      "variants": [
+        "Distancia regulable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "chest-press-machine",
+      "nameEs": "Máquina de press de pecho",
+      "nameEn": "Chest press machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Prensa de pecho"
+      ],
+      "description": "Máquina con trayectoria de empuje para el pecho.",
+      "variants": [
+        "Selectorizada",
+        "Carga con discos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "pec-deck",
+      "nameEs": "Máquina de aperturas de pecho",
+      "nameEn": "Pec deck",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Mariposa de pecho"
+      ],
+      "description": "Máquina de aproximación de brazos delante del tronco.",
+      "variants": [
+        "Apoyo de codos",
+        "Agarres"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "reverse-fly-machine",
+      "nameEs": "Máquina de aperturas inversas",
+      "nameEn": "Reverse fly machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Mariposa inversa"
+      ],
+      "description": "Máquina destinada al movimiento de apertura posterior de brazos.",
+      "variants": [
+        "Agarres regulables"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "shoulder-press-machine",
+      "nameEs": "Máquina de press de hombros",
+      "nameEn": "Shoulder press machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Prensa de hombros"
+      ],
+      "description": "Máquina de empuje sobre la cabeza con asiento y respaldo.",
+      "variants": [
+        "Selectorizada",
+        "Carga con discos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "lateral-raise-machine",
+      "nameEs": "Máquina de elevaciones laterales",
+      "nameEn": "Lateral raise machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Máquina de deltoides laterales"
+      ],
+      "description": "Máquina con apoyos para elevar los brazos lateralmente.",
+      "variants": [
+        "Apoyo de antebrazos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "seated-row-machine",
+      "nameEs": "Máquina de remo sentado",
+      "nameEn": "Seated row machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Remo guiado"
+      ],
+      "description": "Máquina de tracción horizontal con apoyos y trayectoria propia.",
+      "variants": [
+        "Con apoyo de pecho",
+        "Carga con discos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "pullover-machine",
+      "nameEs": "Máquina de pullover",
+      "nameEn": "Pullover machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Pullover guiado"
+      ],
+      "description": "Máquina con palanca de recorrido amplio para tracción de brazos.",
+      "variants": [
+        "Apoyos de codos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "biceps-curl-machine",
+      "nameEs": "Máquina de curl de bíceps",
+      "nameEn": "Biceps curl machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Curl de brazos guiado"
+      ],
+      "description": "Máquina de flexión de codos con resistencia guiada.",
+      "variants": [
+        "Selectorizada"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "triceps-extension-machine",
+      "nameEs": "Máquina de extensión de tríceps",
+      "nameEn": "Triceps extension machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Extensión de brazos guiada"
+      ],
+      "description": "Máquina de extensión de codos con apoyos específicos.",
+      "variants": [
+        "Selectorizada"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "assisted-pullup-machine",
+      "nameEs": "Máquina de dominadas asistidas",
+      "nameEn": "Assisted pull-up machine",
+      "category": "upperMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Dominadas con contrapeso"
+      ],
+      "description": "Estación que descarga parte del peso corporal mediante un apoyo móvil.",
+      "variants": [
+        "Apoyo de rodillas",
+        "Apoyo de pies"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "legPressMachine",
+      "nameEs": "Prensa de piernas",
+      "nameEn": "Leg press machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Prensa de pierna"
+      ],
+      "description": "Máquina de empuje con plataforma y respaldo.",
+      "variants": [
+        "Inclinada",
+        "Horizontal"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "leg-extension-machine",
+      "nameEs": "Máquina de extensión de piernas",
+      "nameEn": "Leg extension machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Extensión de cuádriceps"
+      ],
+      "description": "Máquina de extensión de rodillas con rodillo de resistencia.",
+      "variants": [
+        "Asiento regulable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "leg-curl-machine",
+      "nameEs": "Máquina de curl de piernas",
+      "nameEn": "Leg curl machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Curl femoral"
+      ],
+      "description": "Máquina de flexión de rodillas; la posición debe corresponder al ejercicio.",
+      "variants": [
+        "Sentado",
+        "Tumbado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "hack-squat-machine",
+      "nameEs": "Máquina de sentadilla hack",
+      "nameEn": "Hack squat machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Sentadilla hack guiada"
+      ],
+      "description": "Máquina de sentadilla con carro guiado y apoyo de espalda.",
+      "variants": [
+        "Carro inclinado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "smith-machine",
+      "nameEs": "Máquina Smith",
+      "nameEn": "Smith machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Multipower"
+      ],
+      "description": "Barra integrada en guías; no es una barra libre con discos.",
+      "variants": [
+        "Guía vertical",
+        "Guía inclinada"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "hip-abductor-machine",
+      "nameEs": "Máquina de abducción de cadera",
+      "nameEn": "Hip abductor machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Máquina de abductores"
+      ],
+      "description": "Máquina con resistencia a la separación de las piernas.",
+      "variants": [
+        "Sentado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "hip-adductor-machine",
+      "nameEs": "Máquina de aducción de cadera",
+      "nameEn": "Hip adductor machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Máquina de aductores"
+      ],
+      "description": "Máquina con resistencia al acercamiento de las piernas.",
+      "variants": [
+        "Sentado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "hip-thrust-machine",
+      "nameEs": "Máquina de empuje de cadera",
+      "nameEn": "Hip thrust machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Glute drive"
+      ],
+      "description": "Máquina con apoyo y resistencia para extensión de cadera.",
+      "variants": [
+        "Cinturón",
+        "Almohadilla"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "calf-raise-machine",
+      "nameEs": "Máquina de elevación de gemelos",
+      "nameEn": "Calf raise machine",
+      "category": "lowerMachines",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Máquina de pantorrillas"
+      ],
+      "description": "Máquina para elevación de talones con apoyos propios de su configuración.",
+      "variants": [
+        "Sentado",
+        "De pie"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "cableMachine",
+      "nameEs": "Polea alta",
+      "nameEn": "High pulley",
+      "category": "cableStations",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Jalón en polea alta"
+      ],
+      "description": "Punto de tracción situado por encima del usuario; no implica polea baja ni cruce de poleas.",
+      "variants": [
+        "Asiento para jalón",
+        "Punto alto fijo"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "low-pulley",
+      "nameEs": "Polea baja",
+      "nameEn": "Low pulley",
+      "category": "cableStations",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Tracción de cable baja"
+      ],
+      "description": "Punto de tracción cercano al suelo; debe declararse por separado.",
+      "variants": [
+        "Con apoyo de pies",
+        "Punto bajo fijo"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "cable-crossover",
+      "nameEs": "Cruce de poleas",
+      "nameEn": "Cable crossover",
+      "category": "cableStations",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Crossover de cables"
+      ],
+      "description": "Dos puntos de cable enfrentados para movimientos de cruce.",
+      "variants": [
+        "Altura fija",
+        "Altura regulable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "adjustable-pulley",
+      "nameEs": "Polea de altura regulable",
+      "nameEn": "Adjustable cable column",
+      "category": "cableStations",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Columna de cable ajustable"
+      ],
+      "description": "Columna de cable móvil; sus posiciones no habilitan automáticamente otros tipos de equipo.",
+      "variants": [
+        "Una columna"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "multi-station",
+      "nameEs": "Estación multifunción",
+      "nameEn": "Multi-gym station",
+      "category": "cableStations",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Multigimnasio"
+      ],
+      "description": "Estación con varios módulos; cada equipo necesario debe declararse específicamente.",
+      "variants": [
+        "Módulos según fabricante"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "pullUpBar",
+      "nameEs": "Barra de dominadas",
+      "nameEn": "Pull-up bar",
+      "category": "calisthenics",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Barra fija de tracción"
+      ],
+      "description": "Barra anclada para suspender el cuerpo; no equivale a una barra libre.",
+      "variants": [
+        "Pared",
+        "Techo",
+        "Estructura autónoma"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "dip-bars",
+      "nameEs": "Barras paralelas para fondos",
+      "nameEn": "Dip bars",
+      "category": "calisthenics",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Paralelas altas"
+      ],
+      "description": "Apoyos paralelos para suspensiones y fondos.",
+      "variants": [
+        "Fijas",
+        "Independientes"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "parallettes",
+      "nameEs": "Paralelas bajas",
+      "nameEn": "Parallettes",
+      "category": "calisthenics",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Miniparalelas"
+      ],
+      "description": "Apoyos bajos para ejercicios con manos sobre barras.",
+      "variants": [
+        "Cortas",
+        "Largas"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "gymnastic-rings",
+      "nameEs": "Anillas de gimnasia",
+      "nameEn": "Gymnastic rings",
+      "category": "calisthenics",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Aros de gimnasia"
+      ],
+      "description": "Par de anillas suspendidas mediante correas sobre un anclaje adecuado.",
+      "variants": [
+        "Madera",
+        "Material sintético"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "wall-bars",
+      "nameEs": "Espaldera",
+      "nameEn": "Wall bars",
+      "category": "calisthenics",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Escalera sueca"
+      ],
+      "description": "Estructura vertical con travesaños fijos.",
+      "variants": [
+        "Madera",
+        "Metal"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "pegboard",
+      "nameEs": "Tablero de escalada con clavijas",
+      "nameEn": "Pegboard",
+      "category": "calisthenics",
+      "kind": "support",
+      "modalities": [
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Panel de clavijas"
+      ],
+      "description": "Tablero con orificios y agarres móviles para desplazamiento suspendido.",
+      "variants": [
+        "Vertical",
+        "Inclinado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "climbing-rope",
+      "nameEs": "Cuerda de trepa",
+      "nameEn": "Climbing rope",
+      "category": "calisthenics",
+      "kind": "implement",
+      "modalities": [
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Soga de trepa"
+      ],
+      "description": "Cuerda anclada por su extremo superior para ascensos.",
+      "variants": [
+        "Con nudos",
+        "Sin nudos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "resistanceBand",
+      "nameEs": "Bandas de resistencia",
+      "nameEn": "Resistance bands",
+      "category": "functional",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Bandas elásticas"
+      ],
+      "description": "Elementos elásticos de resistencia variable.",
+      "variants": [
+        "Tubulares",
+        "Lazo cerrado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "suspension-trainer",
+      "nameEs": "Entrenador en suspensión",
+      "nameEn": "Suspension trainer",
+      "category": "functional",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Correas de suspensión"
+      ],
+      "description": "Correas con agarres que requieren un anclaje compatible.",
+      "variants": [
+        "Anclaje único",
+        "Doble anclaje"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "battle-ropes",
+      "nameEs": "Cuerdas de batalla",
+      "nameEn": "Battle ropes",
+      "category": "functional",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Sogas de batida"
+      ],
+      "description": "Cuerdas gruesas para movimientos repetidos desde un anclaje.",
+      "variants": [
+        "Distintas longitudes"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "sled",
+      "nameEs": "Trineo de arrastre",
+      "nameEn": "Training sled",
+      "category": "functional",
+      "kind": "implement",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Trineo de empuje"
+      ],
+      "description": "Base deslizante con puntos de empuje o arrastre.",
+      "variants": [
+        "Empuje",
+        "Arrastre"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "plyo-box",
+      "nameEs": "Cajón pliométrico",
+      "nameEn": "Plyometric box",
+      "category": "functional",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Cajón de salto"
+      ],
+      "description": "Plataforma elevada para movimientos con apoyo o salto según su diseño.",
+      "variants": [
+        "Rígido",
+        "Acolchado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "step-platform",
+      "nameEs": "Plataforma de step",
+      "nameEn": "Aerobic step",
+      "category": "functional",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Escalón de aeróbic"
+      ],
+      "description": "Plataforma baja regulable para pasos y apoyos.",
+      "variants": [
+        "Altura regulable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "stability-ball",
+      "nameEs": "Balón de estabilidad",
+      "nameEn": "Stability ball",
+      "category": "functional",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Fitball",
+        "Pelota suiza"
+      ],
+      "description": "Balón grande inflable que ofrece apoyo móvil.",
+      "variants": [
+        "Distintos diámetros"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "balance-dome",
+      "nameEs": "Semiesfera de equilibrio",
+      "nameEn": "Balance dome",
+      "category": "functional",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Bosu"
+      ],
+      "description": "Base con media esfera inflable para apoyos de equilibrio.",
+      "variants": [
+        "Superficie curva",
+        "Base plana"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "balance-board",
+      "nameEs": "Tabla de equilibrio",
+      "nameEn": "Balance board",
+      "category": "functional",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Plataforma de balanceo"
+      ],
+      "description": "Tabla móvil sobre una base de balanceo.",
+      "variants": [
+        "Basculante",
+        "Con rodillo"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "agility-ladder",
+      "nameEs": "Escalera de agilidad",
+      "nameEn": "Agility ladder",
+      "category": "functional",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Escalera de coordinación"
+      ],
+      "description": "Secuencia de espacios sobre el suelo para desplazamientos.",
+      "variants": [
+        "Celdas regulables"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "training-cones",
+      "nameEs": "Conos de entrenamiento",
+      "nameEn": "Training cones",
+      "category": "functional",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Conos de agilidad"
+      ],
+      "description": "Marcadores para delimitar recorridos y posiciones.",
+      "variants": [
+        "Bajos",
+        "Altos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "mini-hurdles",
+      "nameEs": "Vallas bajas de entrenamiento",
+      "nameEn": "Mini hurdles",
+      "category": "functional",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Vallas de agilidad"
+      ],
+      "description": "Obstáculos bajos para ejercicios de desplazamiento.",
+      "variants": [
+        "Altura fija",
+        "Regulable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "ab-wheel",
+      "nameEs": "Rueda abdominal",
+      "nameEn": "Ab wheel",
+      "category": "functional",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Rodillo abdominal"
+      ],
+      "description": "Rueda con agarres para desplazamientos de las manos.",
+      "variants": [
+        "Una rueda",
+        "Doble rueda"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "mat",
+      "nameEs": "Esterilla",
+      "nameEn": "Exercise mat",
+      "category": "mobility",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Colchoneta de ejercicio"
+      ],
+      "description": "Superficie portátil de apoyo sobre el suelo.",
+      "variants": [
+        "Fina",
+        "Acolchada"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "foam-roller",
+      "nameEs": "Rodillo de espuma",
+      "nameEn": "Foam roller",
+      "category": "mobility",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Rodillo de automasaje"
+      ],
+      "description": "Cilindro de espuma para apoyos y movilidad general.",
+      "variants": [
+        "Liso",
+        "Texturizado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "massage-ball",
+      "nameEs": "Pelota de masaje",
+      "nameEn": "Massage ball",
+      "category": "mobility",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Bola de automasaje"
+      ],
+      "description": "Esfera pequeña para contacto localizado durante movilidad general.",
+      "variants": [
+        "Lisa",
+        "Texturizada"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "yoga-block",
+      "nameEs": "Bloque de yoga",
+      "nameEn": "Yoga block",
+      "category": "mobility",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Ladrillo de yoga"
+      ],
+      "description": "Apoyo rígido ligero para ajustar posiciones.",
+      "variants": [
+        "Corcho",
+        "Espuma"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "yoga-strap",
+      "nameEs": "Correa de yoga",
+      "nameEn": "Yoga strap",
+      "category": "mobility",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Cinta de estiramiento"
+      ],
+      "description": "Cinta no elástica con puntos de agarre para posiciones de movilidad.",
+      "variants": [
+        "Con hebilla",
+        "Con lazos"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "stretching-wedge",
+      "nameEs": "Cuña de estiramiento",
+      "nameEn": "Stretching wedge",
+      "category": "mobility",
+      "kind": "support",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Plano inclinado de movilidad"
+      ],
+      "description": "Apoyo inclinado para colocar los pies en ejercicios de movilidad general.",
+      "variants": [
+        "Ángulo fijo",
+        "Regulable"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "massage-stick",
+      "nameEs": "Bastón de masaje",
+      "nameEn": "Massage stick",
+      "category": "mobility",
+      "kind": "accessory",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Rodillo manual"
+      ],
+      "description": "Bastón con rodillos que se sostiene con las manos.",
+      "variants": [
+        "Segmentado"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "treadmill",
+      "nameEs": "Cinta de correr",
+      "nameEn": "Treadmill",
+      "category": "cardio",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Caminadora"
+      ],
+      "description": "Superficie de marcha o carrera con banda móvil.",
+      "variants": [
+        "Motorizada",
+        "Autopropulsada"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "stationary-bike",
+      "nameEs": "Bicicleta estática",
+      "nameEn": "Stationary bike",
+      "category": "cardio",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Bici fija"
+      ],
+      "description": "Bicicleta estacionaria de pedaleo continuo.",
+      "variants": [
+        "Vertical",
+        "Reclinada",
+        "Ciclismo indoor"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "air-bike",
+      "nameEs": "Bicicleta de aire",
+      "nameEn": "Air bike",
+      "category": "cardio",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Bicicleta con ventilador"
+      ],
+      "description": "Bicicleta con resistencia de aire y agarres móviles según modelo.",
+      "variants": [
+        "Brazos móviles"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "elliptical",
+      "nameEs": "Elíptica",
+      "nameEn": "Elliptical trainer",
+      "category": "cardio",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Entrenador elíptico"
+      ],
+      "description": "Máquina con pedales que recorren una trayectoria elíptica.",
+      "variants": [
+        "Con brazos móviles"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "rowing-ergometer",
+      "nameEs": "Remo ergómetro",
+      "nameEn": "Rowing ergometer",
+      "category": "cardio",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Remadora cardiovascular"
+      ],
+      "description": "Equipo de remo continuo con asiento deslizante y resistencia.",
+      "variants": [
+        "Aire",
+        "Agua",
+        "Magnética"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "ski-ergometer",
+      "nameEs": "Ergómetro de esquí",
+      "nameEn": "Ski ergometer",
+      "category": "cardio",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Simulador de esquí nórdico"
+      ],
+      "description": "Equipo con dos agarres de tracción repetida para acondicionamiento.",
+      "variants": [
+        "Fijado a pared",
+        "Con base"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "stair-climber",
+      "nameEs": "Escaladora",
+      "nameEn": "Stair climber",
+      "category": "cardio",
+      "kind": "machine",
+      "modalities": [
+        "home",
+        "gym"
+      ],
+      "synonyms": [
+        "Máquina de escalones"
+      ],
+      "description": "Máquina de pasos repetidos con escalones o pedales móviles.",
+      "variants": [
+        "Escalones giratorios",
+        "Pedales"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "jump-rope",
+      "nameEs": "Cuerda de saltar",
+      "nameEn": "Jump rope",
+      "category": "cardio",
+      "kind": "implement",
+      "modalities": [
+        "home",
+        "calisthenics",
+        "gym"
+      ],
+      "synonyms": [
+        "Comba"
+      ],
+      "description": "Cuerda con agarres para saltos repetidos.",
+      "variants": [
+        "Velocidad",
+        "Lastrada"
+      ],
+      "defaultAvailability": "unknown"
+    },
+    {
+      "id": "arm-ergometer",
+      "nameEs": "Ergómetro de brazos",
+      "nameEn": "Upper body ergometer",
+      "category": "cardio",
+      "kind": "machine",
+      "modalities": [
+        "gym"
+      ],
+      "synonyms": [
+        "Bicicleta de brazos"
+      ],
+      "description": "Máquina de pedaleo manual para acondicionamiento general.",
+      "variants": [
+        "Sentado",
+        "De pie"
+      ],
+      "defaultAvailability": "unknown"
+    }
+  ]
+}

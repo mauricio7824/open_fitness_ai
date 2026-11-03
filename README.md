@@ -1,5 +1,9 @@
 # Open Fitness AI
 
+La fase **4A** añade un [catálogo universal de 84 equipos, inventario ampliado y reglas de compatibilidad](docs/equipment.md). Conserva los datos de fase 3 mediante lectura de versiones 1/2, mantiene los 18 ejercicios y no incorpora dependencias. Incluye búsqueda bilingüe y por sinónimos, estados de disponibilidad, categorías plegables, propuestas ajustables y equipos personalizados.
+
+Comprobaciones de 4A: `flutter analyze --no-pub` sin incidencias y `flutter test --no-pub` con **124 pruebas aprobadas**, ambos con código 0. La app también se compiló, instaló e inició en el emulador Android 15. Consulta la guía de equipamiento para los detalles y los límites de la comprobación visual.
+
 Aplicación Flutter orientada a Android: entrenamiento físico y seguimiento personal en español, con Material Design 3. La fase 2 añade una biblioteca local de ejercicios.
 
 La fase 3 incorpora perfil deportivo e inventario de equipamiento editables y persistentes. La configuración inicial puede omitirse y retomarse desde el icono de perfil de la barra superior. La biblioteca identifica compatibilidad por material, ofrece filtros opcionales por inventario/modalidades preferidas y limita las alternativas al equipo declarado. Se conservan las cuatro pestañas, los temas y el catálogo de 18 ejercicios. Consulta los [modelos, reglas de personalización y archivos modificados](docs/personalization.md).
