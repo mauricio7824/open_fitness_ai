@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../core/models/exercise.dart';
+import '../../core/state/fitness_controller.dart';
+import '../../shared/widgets/equipment_compatibility.dart';
+import '../profile/inventory_editor_page.dart';
 import '../../shared/widgets/fitness_widgets.dart';
 import 'exercise_detail_page.dart';
 import 'exercise_filter.dart';
 
 class ExercisesPage extends StatefulWidget {
-  const ExercisesPage({super.key, required this.catalog});
+  const ExercisesPage({super.key, required this.catalog, this.controller});
   final ExerciseCatalog catalog;
+  final FitnessController? controller;
   @override
   State<ExercisesPage> createState() => _ExercisesPageState();
 }
@@ -17,18 +21,24 @@ class _ExercisesPageState extends State<ExercisesPage> {
   MuscleGroup? _muscle;
   ExerciseModality? _modality;
   String _equipment = 'all';
+  bool _compatibleOnly = false;
+  bool _preferredOnly = false;
 
   bool get _hasFilters =>
       _search.text.isNotEmpty ||
       _muscle != null ||
       _modality != null ||
-      _equipment != 'all';
+      _equipment != 'all' ||
+      _compatibleOnly ||
+      _preferredOnly;
 
   void _reset() => setState(() {
     _search.clear();
     _muscle = null;
     _modality = null;
     _equipment = 'all';
+    _compatibleOnly = false;
+    _preferredOnly = false;
   });
 
   @override
@@ -39,6 +49,8 @@ class _ExercisesPageState extends State<ExercisesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final preferences = widget.controller?.preferences;
+    final inventory = preferences?.inventory;
     final items = widget.catalog.exercises;
     final muscles = MuscleGroup.values
         .where(
@@ -61,6 +73,11 @@ class _ExercisesPageState extends State<ExercisesPage> {
       modality: _modality,
       withoutEquipment: _equipment == 'none',
       equipment: equipment.where((item) => item.name == _equipment).firstOrNull,
+      inventory: inventory,
+      compatibleOnly: _compatibleOnly,
+      preferredModalities: _preferredOnly
+          ? preferences?.profile?.modalities
+          : null,
     );
     final filtered = filter.apply(items);
     return PageContent(
@@ -150,6 +167,37 @@ class _ExercisesPageState extends State<ExercisesPage> {
           },
         ),
         const SizedBox(height: 12),
+        SwitchListTile(
+          key: const ValueKey('compatible-only'),
+          contentPadding: EdgeInsets.zero,
+          title: const Text('Solo compatibles con mi equipo'),
+          value: _compatibleOnly,
+          onChanged: inventory == null
+              ? null
+              : (value) => setState(() => _compatibleOnly = value),
+        ),
+        if (preferences?.profile != null)
+          SwitchListTile(
+            key: const ValueKey('preferred-modalities-only'),
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Solo mis modalidades preferidas'),
+            value: _preferredOnly,
+            onChanged: (value) => setState(() => _preferredOnly = value),
+          ),
+        if (widget.controller != null)
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton.icon(
+              key: const ValueKey('library-edit-inventory'),
+              onPressed: () => openInventory(context, widget.controller!),
+              icon: const Icon(Icons.tune),
+              label: Text(
+                inventory == null ? 'Configurar mi equipo' : 'Editar mi equipo',
+              ),
+            ),
+          ),
+        const Text('La compatibilidad comprueba solo el material obligatorio.'),
+        const SizedBox(height: 12),
         const Text(
           'El grupo incluye músculos principales y secundarios. El equipo opcional no limita los resultados.',
         ),
@@ -194,6 +242,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
                         context,
                         exercise,
                         catalog: widget.catalog,
+                        controller: widget.controller,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(20),
@@ -217,6 +266,11 @@ class _ExercisesPageState extends State<ExercisesPage> {
                             ),
                             const SizedBox(height: 4),
                             Text(exercise.equipmentLabel),
+                            const SizedBox(height: 8),
+                            EquipmentCompatibility(
+                              exercise: exercise,
+                              inventory: inventory,
+                            ),
                             const SizedBox(height: 8),
                             Text(exercise.difficulty.label),
                             const SizedBox(height: 16),

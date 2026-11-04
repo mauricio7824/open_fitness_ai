@@ -5,6 +5,7 @@ import '../data/exercise_repository.dart';
 import '../data/fitness_catalog.dart';
 import '../models/exercise.dart';
 import '../models/fitness_models.dart';
+import '../models/user_preferences.dart';
 
 class FitnessController extends ChangeNotifier {
   FitnessController(this._store, {ExerciseRepository? exerciseRepository})
@@ -23,6 +24,11 @@ class FitnessController extends ChangeNotifier {
   bool _saving = false;
   bool _savingTheme = false;
   bool _disposed = false;
+  UserPreferences _preferences = UserPreferences();
+  UserPreferences get preferences => _preferences;
+  Future<void> _preferenceQueue = Future.value();
+  int _pendingPreferences = 0;
+  bool get savingPreferences => _pendingPreferences > 0;
 
   List<WorkoutRecord> get records => List.unmodifiable(_records);
   WorkoutSession? get activeSession => _activeSession;
@@ -49,6 +55,7 @@ class FitnessController extends ChangeNotifier {
       _catalog = catalog;
       _workouts = workouts;
       themeMode = data.themeMode;
+      _preferences = data.preferences ?? UserPreferences();
       _records = List.of(data.records)
         ..sort((a, b) => b.completedAt.compareTo(a.completedAt));
     } catch (_) {
@@ -69,6 +76,33 @@ class FitnessController extends ChangeNotifier {
     } finally {
       _savingTheme = false;
     }
+  }
+
+  Future<void> saveProfile(SportsProfile profile) =>
+      _updatePreferences((current) => current.withProfile(profile));
+  Future<void> saveInventory(EquipmentInventory inventory) =>
+      _updatePreferences((current) => current.withInventory(inventory));
+  Future<void> skipSetup() =>
+      _updatePreferences((current) => current.skipSetup());
+
+  Future<void> _updatePreferences(
+    UserPreferences Function(UserPreferences) update,
+  ) {
+    _pendingPreferences++;
+    _notify();
+    final operation = _preferenceQueue.then((_) async {
+      try {
+        final updated = update(_preferences);
+        await _store.savePreferences(updated);
+        _preferences = updated;
+      } finally {
+        _pendingPreferences--;
+        _notify();
+      }
+    });
+    // A failed write must not prevent a later retry or another queued edit.
+    _preferenceQueue = operation.catchError((Object _) {});
+    return operation;
   }
 
   void startWorkout(Workout workout) {

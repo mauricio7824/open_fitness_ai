@@ -6,6 +6,7 @@ import 'core/data/exercise_repository.dart';
 import 'core/state/fitness_controller.dart';
 import 'core/theme/app_theme.dart';
 import 'features/shell/fitness_shell.dart';
+import 'features/profile/profile_page.dart';
 import 'shared/widgets/fitness_widgets.dart';
 
 class OpenFitnessApp extends StatefulWidget {
@@ -71,6 +72,8 @@ class _OpenFitnessAppState extends State<OpenFitnessApp> {
                 ),
               ),
             )
+          : _controller.preferences.needsSetup
+          ? ProfilePage(controller: _controller, initialSetup: true)
           : FitnessShell(controller: _controller),
     ),
   );

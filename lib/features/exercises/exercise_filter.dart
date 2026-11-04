@@ -1,4 +1,5 @@
 import '../../core/models/exercise.dart';
+import '../../core/models/user_preferences.dart';
 
 /// Categories combine with AND; muscle matching includes secondary muscles.
 class ExerciseFilter {
@@ -8,12 +9,18 @@ class ExerciseFilter {
     this.modality,
     this.equipment,
     this.withoutEquipment = false,
+    this.inventory,
+    this.compatibleOnly = false,
+    this.preferredModalities,
   });
   final String query;
   final MuscleGroup? muscle;
   final ExerciseModality? modality;
   final ExerciseEquipment? equipment;
   final bool withoutEquipment;
+  final EquipmentInventory? inventory;
+  final bool compatibleOnly;
+  final Set<ExerciseModality>? preferredModalities;
 
   List<Exercise> apply(Iterable<Exercise> exercises) {
     final words = normalizeExerciseSearch(query)
@@ -30,11 +37,26 @@ class ExerciseFilter {
               (modality == null || exercise.modalities.contains(modality)) &&
               (!withoutEquipment || exercise.requiredEquipment.isEmpty) &&
               (equipment == null ||
-                  exercise.requiredEquipment.contains(equipment));
+                  exercise.requiredEquipment.contains(equipment)) &&
+              (!compatibleOnly || (inventory?.supports(exercise) ?? false)) &&
+              (preferredModalities == null ||
+                  exercise.modalities.any(preferredModalities!.contains));
         })
         .toList(growable: false);
   }
 }
+
+List<ExerciseAlternative> availableAlternatives(
+  Exercise exercise,
+  ExerciseCatalog catalog,
+  EquipmentInventory? inventory,
+) => exercise.alternatives
+    .where(
+      (alternative) =>
+          inventory == null ||
+          inventory.supports(catalog.requireById(alternative.exerciseId)),
+    )
+    .toList(growable: false);
 
 String normalizeExerciseSearch(String value) {
   var result = value.toLowerCase().trim();
