@@ -58,6 +58,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/catalog/exercises.v1.json
+    - assets/catalog/equipment.v1.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

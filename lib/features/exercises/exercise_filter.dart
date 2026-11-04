@@ -12,11 +12,13 @@ class ExerciseFilter {
     this.inventory,
     this.compatibleOnly = false,
     this.preferredModalities,
+    this.equipmentId,
   });
   final String query;
   final MuscleGroup? muscle;
   final ExerciseModality? modality;
   final ExerciseEquipment? equipment;
+  final String? equipmentId;
   final bool withoutEquipment;
   final EquipmentInventory? inventory;
   final bool compatibleOnly;
@@ -35,9 +37,18 @@ class ExerciseFilter {
                   exercise.primaryMuscles.contains(muscle) ||
                   exercise.secondaryMuscles.contains(muscle)) &&
               (modality == null || exercise.modalities.contains(modality)) &&
-              (!withoutEquipment || exercise.requiredEquipment.isEmpty) &&
+              (!withoutEquipment ||
+                  !exercise.equipmentRequirements.needsEquipment) &&
               (equipment == null ||
-                  exercise.requiredEquipment.contains(equipment)) &&
+                  exercise.equipmentRequirements.allOf.any(
+                    (group) =>
+                        group.any((option) => option.contains(equipment!.name)),
+                  )) &&
+              (equipmentId == null ||
+                  exercise.equipmentRequirements.allOf.any(
+                    (group) =>
+                        group.any((option) => option.contains(equipmentId)),
+                  )) &&
               (!compatibleOnly || (inventory?.supports(exercise) ?? false)) &&
               (preferredModalities == null ||
                   exercise.modalities.any(preferredModalities!.contains));

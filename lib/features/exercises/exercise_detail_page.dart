@@ -83,7 +83,11 @@ class ExerciseDetailPage extends StatelessWidget {
               ),
             ),
             const SectionHeading(title: 'Requisitos'),
-            EquipmentCompatibility(exercise: exercise, inventory: inventory),
+            EquipmentCompatibility(
+              exercise: exercise,
+              inventory: inventory,
+              catalog: controller?.equipmentCatalog,
+            ),
             if (controller != null)
               Align(
                 alignment: Alignment.centerRight,
@@ -94,10 +98,12 @@ class ExerciseDetailPage extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 8),
-            Text('Equipo necesario: ${exercise.equipmentLabel}'),
+            Text(
+              'Equipo necesario: ${exercise.equipmentRequirements.describe((id) => controller?.equipmentCatalog.label(id) ?? ExerciseEquipment.values.where((item) => item.name == id).firstOrNull?.label ?? id)}',
+            ),
             const SizedBox(height: 8),
             Text(
-              'Equipo opcional: ${exercise.optionalEquipment.isEmpty ? 'Ninguno' : exercise.optionalEquipment.map((item) => item.label).join(', ')}',
+              'Equipo opcional: ${exercise.equipmentRequirements.optional.isEmpty ? 'Ninguno' : exercise.equipmentRequirements.optional.map((id) => controller?.equipmentCatalog.label(id) ?? ExerciseEquipment.values.where((item) => item.name == id).firstOrNull?.label ?? id).join(', ')}',
             ),
             const SizedBox(height: 12),
             for (final requirement in exercise.requirements)

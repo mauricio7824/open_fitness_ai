@@ -1,5 +1,7 @@
 # Catálogo local de ejercicios
 
+El catálogo universal de equipamiento está en `equipment.v1.json`; su esquema, normalización, migración y motor de compatibilidad se documentan en [la guía de fase 4A](../../docs/equipment.md). Las 18 fichas de `exercises.v1.json` conservan su información actual. Pueden declarar requisitos estructurados explícitos mediante `equipmentRequirements`; si el campo falta, se interpretan sus listas de equipo anteriores.
+
 `exercises.v1.json` se incluye como asset en `pubspec.yaml`. No depende de red, de una cuenta ni de una caché descargada previamente. `AssetExerciseRepository` lo lee; `ExerciseCatalog` valida el esquema y produce objetos inmutables. El repositorio conserva solo lecturas correctas y permite reintentar tras un error.
 
 ## Esquema 1

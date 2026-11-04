@@ -180,6 +180,7 @@ void main() {
     final controller = FitnessController(
       PreferencesFitnessStore(preferences: plugin),
       exerciseRepository: TestExerciseRepository(),
+      equipmentRepository: TestEquipmentRepository(),
     );
     await controller.initialize();
     expect(
@@ -227,6 +228,7 @@ void main() {
       final controller = FitnessController(
         store,
         exerciseRepository: TestExerciseRepository(),
+        equipmentRepository: TestEquipmentRepository(),
       );
       await controller.initialize();
       await Future.wait([
@@ -258,7 +260,7 @@ void main() {
   );
 
   final invalid = <String, void Function(Map<String, dynamic>)>{
-    'versión desconocida': (json) => json['schemaVersion'] = 2,
+    'versión desconocida': (json) => json['schemaVersion'] = 99,
     'perfil sin experiencia': (json) => json['profile']['experience'] = null,
     'experiencia desconocida': (json) =>
         json['profile']['experience'] = 'expert',
@@ -289,7 +291,13 @@ void main() {
         jsonEncode(completePreferences().toJson()),
       ) as Map<String, dynamic>;
       entry.value(json);
-      expect(() => UserPreferences.fromJson(json), throwsFormatException);
+      expect(
+        () => UserPreferences.fromJson(
+          json,
+          equipmentCatalog: testEquipmentCatalog,
+        ),
+        throwsFormatException,
+      );
     });
   }
 }

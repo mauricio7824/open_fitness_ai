@@ -86,7 +86,11 @@ void main() {
       final store = MemoryFitnessStore();
       final repository = TestExerciseRepository()..failRead = true;
       await tester.pumpWidget(
-        OpenFitnessApp(store: store, exerciseRepository: repository),
+        OpenFitnessApp(
+          store: store,
+          exerciseRepository: repository,
+          equipmentRepository: TestEquipmentRepository(),
+        ),
       );
       await tester.pumpAndSettle();
       expect(find.text('No pudimos abrir tus datos'), findsOneWidget);

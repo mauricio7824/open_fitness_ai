@@ -6,10 +6,22 @@ import '../data/fitness_catalog.dart';
 import '../models/exercise.dart';
 import '../models/fitness_models.dart';
 import '../models/user_preferences.dart';
+import '../models/equipment.dart';
+import '../data/equipment_repository.dart';
 
 class FitnessController extends ChangeNotifier {
-  FitnessController(this._store, {ExerciseRepository? exerciseRepository})
-    : _exerciseRepository = exerciseRepository ?? AssetExerciseRepository();
+  FitnessController(
+    this._store, {
+    ExerciseRepository? exerciseRepository,
+    EquipmentRepository? equipmentRepository,
+  }) : _exerciseRepository = exerciseRepository ?? AssetExerciseRepository(),
+       _equipmentRepository = equipmentRepository ?? AssetEquipmentRepository();
+  final EquipmentRepository _equipmentRepository;
+  EquipmentCatalog? _baseEquipmentCatalog;
+  EquipmentCatalog get builtInEquipmentCatalog => _baseEquipmentCatalog!;
+  EquipmentCatalog get equipmentCatalog => _baseEquipmentCatalog!.withCustom(
+    _preferences.inventory?.customEquipment ?? const [],
+  );
   final FitnessStore _store;
   final ExerciseRepository _exerciseRepository;
   ExerciseCatalog? _catalog;
@@ -51,6 +63,10 @@ class FitnessController extends ChangeNotifier {
     try {
       final data = await _store.load();
       final catalog = await _exerciseRepository.load();
+      final equipmentCatalog = await _equipmentRepository.load();
+      catalog.validateEquipment(equipmentCatalog);
+      data.preferences?.inventory?.validateAgainst(equipmentCatalog);
+      _baseEquipmentCatalog = equipmentCatalog;
       final workouts = buildWorkouts(catalog);
       _catalog = catalog;
       _workouts = workouts;
@@ -81,7 +97,10 @@ class FitnessController extends ChangeNotifier {
   Future<void> saveProfile(SportsProfile profile) =>
       _updatePreferences((current) => current.withProfile(profile));
   Future<void> saveInventory(EquipmentInventory inventory) =>
-      _updatePreferences((current) => current.withInventory(inventory));
+      _updatePreferences((current) {
+        inventory.validateAgainst(_baseEquipmentCatalog!);
+        return current.withInventory(inventory);
+      });
   Future<void> skipSetup() =>
       _updatePreferences((current) => current.skipSetup());
 

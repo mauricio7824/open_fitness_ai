@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/data/fitness_store.dart';
 import 'core/data/exercise_repository.dart';
+import 'core/data/equipment_repository.dart';
 import 'core/state/fitness_controller.dart';
 import 'core/theme/app_theme.dart';
 import 'features/shell/fitness_shell.dart';
@@ -14,9 +15,11 @@ class OpenFitnessApp extends StatefulWidget {
     super.key,
     required this.store,
     this.exerciseRepository,
+    this.equipmentRepository,
   });
   final FitnessStore store;
   final ExerciseRepository? exerciseRepository;
+  final EquipmentRepository? equipmentRepository;
   @override
   State<OpenFitnessApp> createState() => _OpenFitnessAppState();
 }
@@ -29,6 +32,7 @@ class _OpenFitnessAppState extends State<OpenFitnessApp> {
     _controller = FitnessController(
       widget.store,
       exerciseRepository: widget.exerciseRepository,
+      equipmentRepository: widget.equipmentRepository,
     )..initialize();
   }
 

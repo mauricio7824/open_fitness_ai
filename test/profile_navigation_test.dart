@@ -4,7 +4,8 @@ import 'package:open_fitness_ai/core/data/fitness_store.dart';
 import 'package:open_fitness_ai/core/models/exercise.dart';
 import 'package:open_fitness_ai/core/models/user_preferences.dart';
 
-import 'navigation_test.dart' show openApp, selectTab, selectFilter, tapVisible;
+import 'navigation_test.dart'
+    show openApp, selectTab, selectFilter, tapVisible, tapInventoryItem;
 import 'support/memory_fitness_store.dart';
 import 'user_preferences_test.dart' show exampleProfile;
 
@@ -55,11 +56,8 @@ void main() {
       await tapVisible(tester, find.byKey(const ValueKey('save-profile')));
       expect(find.text('Duración habitual: 30 min'), findsOneWidget);
       await tapVisible(tester, find.byKey(const ValueKey('edit-inventory')));
-      await tapVisible(
-        tester,
-        find.byKey(const ValueKey('inventory-dumbbells')),
-      );
-      await tapVisible(tester, find.byKey(const ValueKey('inventory-bench')));
+      await tapInventoryItem(tester, 'dumbbells');
+      await tapInventoryItem(tester, 'bench');
       await tapVisible(tester, find.byKey(const ValueKey('save-inventory')));
       expect(find.byType(NavigationBar), findsOneWidget);
       expect(store.data.preferences!.setupStatus, SetupStatus.completed);
@@ -135,10 +133,7 @@ void main() {
         find.text('Selecciona material o marca «Sin material».'),
         findsOneWidget,
       );
-      await tapVisible(
-        tester,
-        find.byKey(const ValueKey('inventory-dumbbells')),
-      );
+      await tapInventoryItem(tester, 'dumbbells');
       await tester.tap(find.byType(BackButton));
       await tester.pumpAndSettle();
       expect(store.data.preferences!.inventory, isNull);
@@ -174,7 +169,7 @@ void main() {
         tester,
         find.byKey(const ValueKey('library-edit-inventory')),
       );
-      await tapVisible(tester, find.byKey(const ValueKey('inventory-bench')));
+      await tapInventoryItem(tester, 'bench');
       await tapVisible(tester, find.byKey(const ValueKey('save-inventory')));
       expect(find.text('1 ejercicio'), findsOneWidget);
       expect(find.text('Compatible con tu equipo'), findsOneWidget);
@@ -209,7 +204,7 @@ void main() {
         tester,
         find.byKey(const ValueKey('detail-edit-inventory')),
       );
-      await tapVisible(tester, find.byKey(const ValueKey('inventory-wall')));
+      await tapInventoryItem(tester, 'wall');
       await tapVisible(tester, find.byKey(const ValueKey('save-inventory')));
       expect(find.text('Detalle del ejercicio'), findsOneWidget);
       expect(

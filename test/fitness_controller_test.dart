@@ -17,6 +17,7 @@ void main() {
     controller = FitnessController(
       store,
       exerciseRepository: TestExerciseRepository(),
+      equipmentRepository: TestEquipmentRepository(),
     );
     workouts = buildWorkouts(testExerciseCatalog);
   });

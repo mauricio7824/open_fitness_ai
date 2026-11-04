@@ -1,5 +1,7 @@
 # Perfil deportivo y equipamiento — fase 3
 
+Este documento describe la base de fase 3. La [fase 4A](equipment.md) amplía el inventario a IDs de catálogo y escribe versión 2, conservando la lectura de versión 1 y las preferencias anteriores. Consulta esa guía para el formato actual de equipamiento.
+
 La personalización es local y editable. La barra superior abre «Perfil y equipamiento» y conserva las cuatro pestañas existentes. La biblioteca mantiene sus 18 ejercicios, sus filtros y sus fuentes. No se incorporaron dependencias, nuevas referencias científicas, rutinas automáticas ni servicios remotos.
 
 ## Modelos

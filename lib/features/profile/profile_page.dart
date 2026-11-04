@@ -124,7 +124,12 @@ class ProfilePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SectionHeading(title: 'Tu equipamiento'),
-                        Text(inventory?.label ?? 'Inventario sin configurar'),
+                        Text(
+                          inventory?.displayLabel(
+                                controller.equipmentCatalog,
+                              ) ??
+                              'Inventario sin configurar',
+                        ),
                         const SizedBox(height: 12),
                         const Text(
                           'La biblioteca comprobará el material obligatorio de cada ejercicio.',

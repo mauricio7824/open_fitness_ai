@@ -1,13 +1,9 @@
 import 'dart:convert';
 
-enum ExerciseModality {
-  gym('Gimnasio'),
-  home('Casa'),
-  calisthenics('Calistenia');
-
-  const ExerciseModality(this.label);
-  final String label;
-}
+import 'training_modality.dart';
+import 'equipment.dart';
+import 'equipment_requirements.dart';
+export 'training_modality.dart';
 
 enum MuscleGroup {
   quadriceps('Cuádriceps'),
@@ -178,6 +174,7 @@ class Exercise {
     required this.sources,
     required this.resources,
     required this.editorial,
+    required this.equipmentRequirements,
   });
 
   final String id;
@@ -195,6 +192,7 @@ class Exercise {
   final List<ExerciseSource> sources;
   final List<ExerciseResource> resources;
   final EditorialReview editorial;
+  final EquipmentRequirements equipmentRequirements;
 
   String get equipmentLabel => requiredEquipment.isEmpty
       ? 'Sin material'
@@ -217,6 +215,12 @@ class Exercise {
       'optionalEquipment',
       ExerciseEquipment.values,
     );
+    final equipmentRequirements = json.containsKey('equipmentRequirements')
+        ? EquipmentRequirements.fromJson(json['equipmentRequirements'])
+        : EquipmentRequirements.legacy(
+            requiredEquipment.map((item) => item.name),
+            optional.map((item) => item.name),
+          );
     final modalities = _enums(json, 'modalities', ExerciseModality.values);
     final instructions = _strings(json, 'instructions');
     final requirements = _strings(json, 'requirements');
@@ -255,6 +259,7 @@ class Exercise {
       sources: sources,
       resources: _objects(json, 'resources', ExerciseResource.fromJson),
       editorial: editorial,
+      equipmentRequirements: equipmentRequirements,
     );
   }
 }
@@ -265,6 +270,11 @@ class ExerciseCatalog {
   final int version;
   final List<Exercise> exercises;
   final Map<String, Exercise> _byId;
+  void validateEquipment(EquipmentCatalog catalog) {
+    for (final exercise in exercises) {
+      exercise.equipmentRequirements.validate(catalog);
+    }
+  }
 
   Exercise? findById(String id) => _byId[id];
   Exercise requireById(String id) =>
