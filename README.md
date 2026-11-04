@@ -1,5 +1,9 @@
 # Open Fitness AI
 
+La fase **4B** amplía las [18 fichas con técnica y enseñanza de ejercicios](docs/exercise_technique.md): preparación, pasos, respiración, control, errores observables, consejos, variantes de menor dificultad, progresiones y precauciones. Incluye señales de parada visibles y referencias consultadas para todos los ejercicios. Las 18 fichas siguen pendientes de revisión editorial. Conserva los datos previos, el catálogo de 84 equipos, el perfil, el historial y el funcionamiento sin conexión; no añade dependencias ni multimedia.
+
+Verificación de 4B: análisis estático con `dart analyze --fatal-infos` sin incidencias y **162 pruebas aprobadas** (124 existentes y 38 nuevas), con código 0. Las pruebas recorren las secciones de las 18 fichas a 320 × 568, texto al 200 % y temas claro/oscuro. Se utilizaron copias originales de paquetes dentro de `.dart_tool` y un lanzador temporal sin actualización de caché; consulta la guía de técnica para los detalles del entorno y los límites de esta verificación.
+
 La fase **4A** añade un [catálogo universal de 84 equipos, inventario ampliado y reglas de compatibilidad](docs/equipment.md). Conserva los datos de fase 3 mediante lectura de versiones 1/2, mantiene los 18 ejercicios y no incorpora dependencias. Incluye búsqueda bilingüe y por sinónimos, estados de disponibilidad, categorías plegables, propuestas ajustables y equipos personalizados.
 
 Comprobaciones de 4A: `flutter analyze --no-pub` sin incidencias y `flutter test --no-pub` con **124 pruebas aprobadas**, ambos con código 0. La app también se compiló, instaló e inició en el emulador Android 15. Consulta la guía de equipamiento para los detalles y los límites de la comprobación visual.
@@ -60,11 +64,11 @@ La búsqueda usa solo el nombre y tolera mayúsculas, tildes y espacios. Todos l
 
 Las seis referencias registradas se consultaron el 3 de noviembre de 2026 en la biblioteca de [ACE](https://www.acefitness.org/resources/everyone/exercise-library/): [sentadilla](https://www.acefitness.org/resources/everyone/exercise-library/135/bodyweight-squat/), [flexiones](https://www.acefitness.org/resources/everyone/exercise-library/41/push-up/), [puente de glúteos](https://www.acefitness.org/resources/everyone/exercise-library/49/glute-bridge/), [plancha](https://www.acefitness.org/resources/everyone/exercise-library/32/front-plank/), [bird dog](https://www.acefitness.org/resources/everyone/exercise-library/14/bird-dog/) y [flexiones con rodillas apoyadas](https://www.acefitness.org/resources/everyone/exercise-library/13/bent-knee-push-up/). Son referencias de consulta, no licencias de reproducción de sus recursos.
 
-La redacción en español, las categorías y las alternativas están pendientes de revisión editorial en los **18 ejercicios**; ninguno figura firmado ni aprobado. Los **12 ejercicios restantes** todavía no tienen referencia verificada registrada. La interfaz muestra ambos estados de forma explícita. Las alternativas son opciones para comparar, no sustituciones personalizadas ni tratamientos.
+La fase 4B reconsultó esas seis referencias y completó las otras doce el 4 de noviembre de 2026. Consulta la [relación de fuentes y su alcance](docs/exercise_technique.md). La redacción en español, las categorías, variantes y alternativas están pendientes de revisión editorial en los **18 ejercicios**; ninguno figura firmado ni aprobado. Las alternativas son opciones para comparar, no sustituciones personalizadas ni tratamientos.
 
 No se incorporaron fotos ni videos. El modelo reserva metadatos de autoría, origen y licencia para futuros recursos locales. No se asigna ninguna licencia ficticia. Las URL de las fuentes son seleccionables para copiarlas; su consulta externa necesita conexión, pero el contenido del ejercicio permanece disponible sin ella.
 
-Pendiente de futuras fases: revisión editorial, completar las referencias que faltan y, si se decide incorporarlos, recursos multimedia con autorización y su visualización. La edición/importación de catálogos desde la interfaz y las actualizaciones remotas no están implementadas.
+Pendiente de futuras fases: revisión editorial y técnica cualificada y, en la fase 4C, recursos multimedia con autorización y su visualización. La edición/importación de catálogos desde la interfaz y las actualizaciones remotas no están implementadas.
 
 ## Desarrollo
 

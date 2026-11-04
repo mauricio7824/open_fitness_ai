@@ -55,11 +55,18 @@ enum EditorialStatus {
 
 /// A reference is not a license to redistribute the referenced site's media.
 class ExerciseSource {
-  ExerciseSource._(this.title, this.publisher, this.url, this.checkedOn);
+  ExerciseSource._(
+    this.title,
+    this.publisher,
+    this.url,
+    this.checkedOn,
+    this.scope,
+  );
   final String title;
   final String publisher;
   final Uri url;
   final DateTime checkedOn;
+  final String? scope;
 
   factory ExerciseSource.fromJson(Map<String, dynamic> json) =>
       ExerciseSource._(
@@ -67,6 +74,7 @@ class ExerciseSource {
         _text(json, 'publisher'),
         _url(json, 'url'),
         _date(json, 'checkedOn'),
+        json.containsKey('scope') ? _text(json, 'scope') : null,
       );
 }
 
@@ -157,6 +165,85 @@ class ExerciseAlternative {
       ExerciseAlternative._(_text(json, 'exerciseId'), _text(json, 'reason'));
 }
 
+/// Observable teaching cues; these do not diagnose the cause of a movement.
+class TechniqueError {
+  TechniqueError._(this.title, this.recognition, this.correction);
+  final String title;
+  final String recognition;
+  final String correction;
+
+  factory TechniqueError.fromJson(Map<String, dynamic> json) =>
+      TechniqueError._(
+        _text(json, 'title'),
+        _text(json, 'recognition'),
+        _text(json, 'correction'),
+      );
+}
+
+/// Adjustments of the same movement, separate from catalog alternatives.
+class TechniqueVariation {
+  TechniqueVariation._(this.title, this.description);
+  final String title;
+  final String description;
+
+  factory TechniqueVariation.fromJson(Map<String, dynamic> json) =>
+      TechniqueVariation._(_text(json, 'title'), _text(json, 'description'));
+}
+
+class ExerciseTechnique {
+  ExerciseTechnique._({
+    required this.preparation,
+    required this.steps,
+    required this.breathing,
+    required this.control,
+    required this.commonErrors,
+    required this.tips,
+    required this.regressions,
+    required this.progressions,
+    required this.precautions,
+    required this.stopSignals,
+  });
+
+  final List<String> preparation;
+  final List<String> steps;
+  final List<String> breathing;
+  final List<String> control;
+  final List<TechniqueError> commonErrors;
+  final List<String> tips;
+  final List<TechniqueVariation> regressions;
+  final List<TechniqueVariation> progressions;
+  final List<String> precautions;
+  final List<String> stopSignals;
+
+  factory ExerciseTechnique.fromJson(Map<String, dynamic> json) {
+    final technique = ExerciseTechnique._(
+      preparation: _strings(json, 'preparation'),
+      steps: _strings(json, 'steps'),
+      breathing: _strings(json, 'breathing'),
+      control: _strings(json, 'control'),
+      commonErrors: _objects(json, 'commonErrors', TechniqueError.fromJson),
+      tips: _strings(json, 'tips'),
+      regressions: _objects(json, 'regressions', TechniqueVariation.fromJson),
+      progressions: _objects(json, 'progressions', TechniqueVariation.fromJson),
+      precautions: _strings(json, 'precautions'),
+      stopSignals: _strings(json, 'stopSignals'),
+    );
+    if (technique.preparation.isEmpty ||
+        technique.steps.length < 3 ||
+        technique.breathing.isEmpty ||
+        technique.control.isEmpty ||
+        technique.commonErrors.isEmpty ||
+        technique.tips.isEmpty ||
+        technique.regressions.isEmpty ||
+        technique.progressions.isEmpty ||
+        technique.precautions.isEmpty ||
+        technique.stopSignals.isEmpty) {
+      throw const FormatException('Ficha técnica incompleta.');
+    }
+    return technique;
+  }
+}
+
 class Exercise {
   Exercise._({
     required this.id,
@@ -175,6 +262,7 @@ class Exercise {
     required this.resources,
     required this.editorial,
     required this.equipmentRequirements,
+    required this.technique,
   });
 
   final String id;
@@ -193,6 +281,7 @@ class Exercise {
   final List<ExerciseResource> resources;
   final EditorialReview editorial;
   final EquipmentRequirements equipmentRequirements;
+  final ExerciseTechnique? technique;
 
   String get equipmentLabel => requiredEquipment.isEmpty
       ? 'Sin material'
@@ -260,16 +349,54 @@ class Exercise {
       resources: _objects(json, 'resources', ExerciseResource.fromJson),
       editorial: editorial,
       equipmentRequirements: equipmentRequirements,
+      technique: json.containsKey('technique')
+          ? ExerciseTechnique.fromJson(_object(json['technique']))
+          : null,
+    );
+  }
+}
+
+/// Shared educational precautions and their references, bundled offline.
+class TeachingGuidance {
+  TeachingGuidance._(
+    this.scope,
+    this.precautions,
+    this.stopSignals,
+    this.sources,
+  );
+  final String scope;
+  final List<String> precautions;
+  final List<String> stopSignals;
+  final List<ExerciseSource> sources;
+
+  factory TeachingGuidance.fromJson(Map<String, dynamic> json) {
+    final precautions = _strings(json, 'precautions');
+    final stopSignals = _strings(json, 'stopSignals');
+    final sources = _objects(json, 'sources', ExerciseSource.fromJson);
+    if (precautions.isEmpty || stopSignals.isEmpty || sources.isEmpty) {
+      throw const FormatException('Orientaciones generales incompletas.');
+    }
+    return TeachingGuidance._(
+      _text(json, 'scope'),
+      precautions,
+      stopSignals,
+      sources,
     );
   }
 }
 
 /// Versioned, validated, immutable snapshot of the offline catalog.
 class ExerciseCatalog {
-  ExerciseCatalog._(this.version, this.exercises, this._byId);
+  ExerciseCatalog._(
+    this.version,
+    this.exercises,
+    this._byId,
+    this.teachingGuidance,
+  );
   final int version;
   final List<Exercise> exercises;
   final Map<String, Exercise> _byId;
+  final TeachingGuidance? teachingGuidance;
   void validateEquipment(EquipmentCatalog catalog) {
     for (final exercise in exercises) {
       exercise.equipmentRequirements.validate(catalog);
@@ -315,6 +442,9 @@ class ExerciseCatalog {
       json['catalogVersion'] as int,
       exercises,
       Map.unmodifiable(byId),
+      json.containsKey('teachingGuidance')
+          ? TeachingGuidance.fromJson(_object(json['teachingGuidance']))
+          : null,
     );
   }
 }

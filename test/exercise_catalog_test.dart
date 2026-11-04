@@ -37,7 +37,7 @@ void main() {
   test('El catálogo local está empaquetado y se puede cargar sin servicios remotos', () async {
     final loaded = await AssetExerciseRepository().load();
     expect(loaded.exercises.length, 18);
-    expect(loaded.version, 1);
+    expect(loaded.version, 2);
   });
 
   test('El repositorio conserva la instantánea en memoria', () async {
@@ -108,7 +108,7 @@ void main() {
   test('No atribuye revisión ni licencia multimedia inexistentes', () {
     expect(
       catalog.exercises.where((item) => item.sources.isNotEmpty),
-      hasLength(6),
+      hasLength(18),
     );
     for (final exercise in catalog.exercises) {
       expect(exercise.editorial.status, EditorialStatus.pending);
@@ -116,8 +116,12 @@ void main() {
       expect(exercise.editorial.reviewedOn, isNull);
       expect(exercise.resources, isEmpty);
       for (final source in exercise.sources) {
-        expect(source.url.host, 'www.acefitness.org');
-        expect(source.checkedOn, DateTime(2026, 11, 3));
+        expect(source.url.scheme, 'https');
+        expect(source.scope, isNotEmpty);
+        expect(
+          source.checkedOn,
+          isIn([DateTime(2026, 11, 3), DateTime(2026, 11, 4)]),
+        );
       }
     }
   });
@@ -246,7 +250,7 @@ void main() {
       exercise['sources'] = [];
       exercise['editorial']['status'] = 'reviewed';
       exercise['editorial']['reviewer'] = 'Revisor de prueba';
-      exercise['editorial']['reviewedOn'] = '2026-11-03';
+      exercise['editorial']['reviewedOn'] = '2026-11-04';
     },
     'recurso sin licencia': (json) => firstExercise(json)['resources'] = [
       {
