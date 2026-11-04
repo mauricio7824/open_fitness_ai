@@ -1,12 +1,14 @@
 # Catálogo local de ejercicios
 
-El catálogo universal de equipamiento está en `equipment.v1.json`; su esquema, normalización, migración y motor de compatibilidad se documentan en [la guía de fase 4A](../../docs/equipment.md). Las 18 fichas de `exercises.v1.json` conservan su información actual. Pueden declarar requisitos estructurados explícitos mediante `equipmentRequirements`; si el campo falta, se interpretan sus listas de equipo anteriores.
+El catálogo universal de equipamiento está en `equipment.v1.json`; su esquema, normalización, migración y motor de compatibilidad se documentan en [la guía de fase 4A](../../docs/equipment.md). Las 18 fichas de `exercises.v1.json` conservan su información previa y añaden [técnica y enseñanza en la fase 4B](../../docs/exercise_technique.md). Pueden declarar requisitos estructurados explícitos mediante `equipmentRequirements`; si el campo falta, se interpretan sus listas de equipo anteriores.
 
 `exercises.v1.json` se incluye como asset en `pubspec.yaml`. No depende de red, de una cuenta ni de una caché descargada previamente. `AssetExerciseRepository` lo lee; `ExerciseCatalog` valida el esquema y produce objetos inmutables. El repositorio conserva solo lecturas correctas y permite reintentar tras un error.
 
 ## Esquema 1
 
 La raíz exige `schemaVersion: 1`, `catalogVersion` entero positivo y `exercises`, una lista no vacía. Cambia `catalogVersion` al actualizar el contenido. Un cambio incompatible de estructura necesita un nuevo esquema y adaptación del decodificador.
+
+La versión actual del contenido es **2**. Añade los campos opcionales `technique` por ejercicio y `teachingGuidance` en la raíz, conservando la lectura del formato previo. Si están presentes se exige su contenido completo; el asset actual incluye ambos en todas las fichas. La [guía de técnica](../../docs/exercise_technique.md) detalla sus campos y validación.
 
 Cada ejercicio requiere:
 
@@ -31,9 +33,9 @@ Los filtros combinan búsqueda por nombre, músculos principales/secundarios, mo
 
 ## Fuentes, recursos y revisión
 
-Una fuente contiene `title`, `publisher`, `url` HTTPS y `checkedOn` en formato `AAAA-MM-DD`. Conserva el título real de la publicación. Registrar una URL significa que se comprobó la referencia, no que el editor del sitio aprobó el contenido de esta app. La validación automática comprueba formato y duplicados; no certifica la veracidad ni los derechos de una fuente.
+Una fuente contiene `title`, `publisher`, `url` HTTPS y `checkedOn` en formato `AAAA-MM-DD`. El campo opcional `scope` explica qué cubre la referencia y las diferencias respecto a la ficha. Conserva el título real de la publicación. Registrar una URL significa que se comprobó la referencia, no que el editor del sitio aprobó el contenido de esta app. La validación automática comprueba formato y duplicados; no certifica la veracidad ni los derechos de una fuente.
 
-Antes de añadir una referencia, abre la página original, comprueba que describe el movimiento concreto y registra la fecha real. No deduzcas URLs ni inventes fechas, autores o publicaciones. Si falta verificación, deja la lista vacía y mantén la revisión pendiente. Las seis fuentes del catálogo inicial se consultaron el 3 de noviembre de 2026; las otras doce fichas no declaran fuentes comprobadas.
+Antes de añadir una referencia, abre la página original, comprueba que describe el movimiento concreto y registra la fecha real. No deduzcas URLs ni inventes fechas, autores o publicaciones. Si falta verificación, deja la lista vacía y mantén la revisión pendiente. Las seis fuentes iniciales conservan su registro del 3 de noviembre de 2026 y se reconsultaron el día 4. Las doce referencias restantes y las orientaciones comunes se consultaron el 4 de noviembre de 2026.
 
 Un recurso necesita `kind` (`image` o `video`), `assetPath` dentro de `assets/`, `creator`, `sourceUrl`, `license` y `licenseUrl`. Además hay que incluir el archivo en el bundle, comprobar sus derechos de redistribución y añadir su renderizado: esta fase solo prepara los metadatos, no un visor multimedia. Una referencia bibliográfica no autoriza a descargar ni redistribuir sus fotos o videos.
 

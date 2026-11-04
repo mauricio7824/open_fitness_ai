@@ -6,6 +6,7 @@ import '../../core/state/fitness_controller.dart';
 import '../../shared/widgets/equipment_compatibility.dart';
 import '../profile/inventory_editor_page.dart';
 import 'exercise_filter.dart';
+import 'exercise_technique_sections.dart';
 
 Future<void> showExerciseDetails(
   BuildContext context,
@@ -51,6 +52,12 @@ class ExerciseDetailPage extends StatelessWidget {
         child: PageContent(
           children: [
             PageHeading(title: exercise.name, subtitle: exercise.description),
+            if (exercise.technique != null &&
+                exercise.editorial.status == EditorialStatus.pending)
+              const Padding(
+                padding: EdgeInsets.only(bottom: 12),
+                child: Text('Guía educativa pendiente de revisión editorial.'),
+              ),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -111,23 +118,55 @@ class ExerciseDetailPage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Text('• $requirement'),
               ),
-            const SectionHeading(title: 'Cómo realizarlo'),
-            for (var index = 0; index < exercise.instructions.length; index++)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${index + 1}.',
-                      style: Theme.of(context).textTheme.titleMedium,
+            if (exercise.technique case final technique?) ...[
+              ExerciseTechniqueSections(
+                key: ValueKey('technique-${exercise.id}'),
+                technique: technique,
+                guidance: catalog.teachingGuidance,
+              ),
+              ExpansionTile(
+                key: const PageStorageKey('original-instructions'),
+                title: const Text('Resumen de instrucciones'),
+                children: [
+                  for (
+                    var index = 0;
+                    index < exercise.instructions.length;
+                    index++
+                  )
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      child: Text(
+                        '${index + 1}. ${exercise.instructions[index]}',
+                      ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(child: Text(exercise.instructions[index])),
-                  ],
+                ],
+              ),
+            ] else ...[
+              const SectionHeading(title: 'Cómo realizarlo'),
+              for (var index = 0; index < exercise.instructions.length; index++)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${index + 1}.',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(child: Text(exercise.instructions[index])),
+                    ],
+                  ),
+                ),
+            ],
+            const SectionHeading(title: 'Alternativas'),
+            if (exercise.technique != null)
+              const Padding(
+                padding: EdgeInsets.only(bottom: 12),
+                child: Text(
+                  'Las variantes ajustan este movimiento; las progresiones aumentan su exigencia. Las alternativas son otros ejercicios con requisitos propios y no sustituyen automáticamente tu rutina.',
                 ),
               ),
-            const SectionHeading(title: 'Alternativas'),
             if (alternatives.isEmpty)
               Text(
                 exercise.alternatives.isEmpty
@@ -196,21 +235,24 @@ class ExerciseDetailPage extends StatelessWidget {
                     ],
                     const SizedBox(height: 16),
                     if (exercise.sources.isEmpty)
-                      const Text('Sin fuentes verificadas registradas.')
-                    else
-                      for (final source in exercise.sources) ...[
-                        Text(
-                          source.title,
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(source.publisher),
-                        SelectableText(source.url.toString()),
-                        Text(
-                          'Referencia comprobada: ${formatDate(context, source.checkedOn)}',
-                        ),
-                        const SizedBox(height: 12),
-                      ],
+                      const Text('Sin fuentes verificadas registradas.'),
+                    for (final source in [
+                      ...exercise.sources,
+                      ...?catalog.teachingGuidance?.sources,
+                    ]) ...[
+                      Text(
+                        source.title,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(source.publisher),
+                      if (source.scope != null) Text(source.scope!),
+                      SelectableText(source.url.toString()),
+                      Text(
+                        'Referencia comprobada: ${formatDate(context, source.checkedOn)}',
+                      ),
+                      const SizedBox(height: 12),
+                    ],
                     const Text(
                       'Las instrucciones están guardadas en la app. Las referencias externas requieren conexión para consultarse.',
                     ),
