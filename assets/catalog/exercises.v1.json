@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": 1,
+  "exercises": [
+    {
+      "id": "squat", "name": "Sentadilla",
+      "description": "Flexión y extensión de piernas con el peso del cuerpo.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["quadriceps", "glutes"], "secondaryMuscles": ["core"],
+      "requiredEquipment": [], "optionalEquipment": [], "difficulty": "beginner",
+      "instructions": [
+        "De pie, separa los pies un poco más que las caderas y orienta ligeramente las puntas hacia fuera.",
+        "Lleva la cadera hacia atrás y abajo, flexionando las rodillas con los talones apoyados.",
+        "Mantén el tronco estable y vuelve a subir de forma controlada."
+      ],
+      "requirements": ["Suelo firme y espacio libre para flexionar las piernas."],
+      "alternatives": [{"exerciseId": "goblet-squat", "reason": "Variante con una mancuerna que añade carga externa."}],
+      "sources": [{"title": "Bodyweight Squat", "publisher": "American Council on Exercise (ACE)", "url": "https://www.acefitness.org/resources/everyone/exercise-library/135/bodyweight-squat/", "checkedOn": "2026-11-03"}],
+      "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Referencia consultada. Clasificación, redacción en español y alternativas pendientes de revisión editorial."}
+    },
+    {
+      "id": "pushup", "name": "Flexiones",
+      "description": "Empuje horizontal con el peso del cuerpo y apoyo de manos y pies.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["chest", "triceps"], "secondaryMuscles": ["shoulders", "core"],
+      "requiredEquipment": [], "optionalEquipment": ["mat"], "difficulty": "intermediate",
+      "instructions": [
+        "Apoya las manos bajo los hombros y extiende las piernas, formando una línea con el tronco.",
+        "Flexiona los codos para acercar el pecho al suelo sin dejar caer la cadera.",
+        "Empuja el suelo y vuelve a extender los brazos manteniendo el cuerpo alineado."
+      ],
+      "requirements": ["Superficie firme y espacio para extender el cuerpo."],
+      "alternatives": [
+        {"exerciseId": "knee-pushup", "reason": "El apoyo de rodillas reduce la parte del peso corporal que desplazas."},
+        {"exerciseId": "wall-pushup", "reason": "Variante de pie con apoyo de manos en una pared."}
+      ],
+      "sources": [{"title": "Push-up", "publisher": "American Council on Exercise (ACE)", "url": "https://www.acefitness.org/resources/everyone/exercise-library/41/push-up/", "checkedOn": "2026-11-03"}],
+      "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Referencia consultada. Clasificación, redacción en español y alternativas pendientes de revisión editorial."}
+    },
+    {
+      "id": "bridge", "name": "Puente de glúteos",
+      "description": "Elevación de la cadera desde el suelo con ambos pies apoyados.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["glutes"], "secondaryMuscles": ["hamstrings", "core"],
+      "requiredEquipment": [], "optionalEquipment": ["mat"], "difficulty": "beginner",
+      "instructions": [
+        "Túmbate boca arriba con las rodillas flexionadas y los pies separados al ancho de las caderas.",
+        "Presiona los pies y eleva la cadera, manteniendo el abdomen activo sin arquear la espalda.",
+        "Baja lentamente hasta apoyar de nuevo la cadera."
+      ],
+      "requirements": ["Espacio para tumbarte sobre una superficie estable."],
+      "alternatives": [{"exerciseId": "squat", "reason": "Otra forma de trabajar glúteos y piernas, en posición de pie."}],
+      "sources": [{"title": "Glute Bridge Exercise", "publisher": "American Council on Exercise (ACE)", "url": "https://www.acefitness.org/resources/everyone/exercise-library/49/glute-bridge/", "checkedOn": "2026-11-03"}],
+      "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Referencia consultada. Clasificación, redacción en español y alternativas pendientes de revisión editorial."}
+    },
+    {
+      "id": "plank", "name": "Plancha",
+      "description": "Posición estática con apoyo de antebrazos y puntas de los pies.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["core"], "secondaryMuscles": ["shoulders", "glutes"],
+      "requiredEquipment": [], "optionalEquipment": ["mat"], "difficulty": "intermediate",
+      "instructions": [
+        "Coloca los antebrazos en el suelo con los codos bajo los hombros.",
+        "Extiende las piernas y eleva el tronco formando una línea desde la cabeza hasta los talones.",
+        "Respira con normalidad, evita hundir la cadera y baja con control al terminar."
+      ],
+      "requirements": ["Superficie estable con espacio para extender las piernas."],
+      "alternatives": [{"exerciseId": "bird-dog", "reason": "Movimiento de zona media con apoyo de manos y rodillas."}, {"exerciseId": "side-plank", "reason": "Variante con apoyo lateral y exigencias distintas de equilibrio."}],
+      "sources": [{"title": "Front Plank", "publisher": "American Council on Exercise (ACE)", "url": "https://www.acefitness.org/resources/everyone/exercise-library/32/front-plank/", "checkedOn": "2026-11-03"}],
+      "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Referencia consultada. Clasificación, redacción en español y alternativas pendientes de revisión editorial."}
+    },
+    {
+      "id": "lunge", "name": "Zancadas alternas",
+      "description": "Zancada hacia atrás que alterna el trabajo de ambas piernas.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["quadriceps", "glutes"], "secondaryMuscles": ["hamstrings", "core"],
+      "requiredEquipment": [], "optionalEquipment": [], "difficulty": "intermediate",
+      "instructions": [
+        "Empieza de pie y da un paso hacia atrás con una pierna.",
+        "Flexiona las dos rodillas manteniendo el pie delantero apoyado y el tronco erguido.",
+        "Empuja con la pierna delantera para regresar y repite cambiando de lado."
+      ],
+      "requirements": ["Espacio libre detrás de ti y suelo que no resbale."],
+      "alternatives": [{"exerciseId": "squat", "reason": "Opción con los dos pies fijos sobre el suelo."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "bird-dog", "name": "Bird dog",
+      "description": "Extensión alterna de brazo y pierna contrarios desde cuatro apoyos.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["core"], "secondaryMuscles": ["glutes", "back"],
+      "requiredEquipment": [], "optionalEquipment": ["mat"], "difficulty": "intermediate",
+      "instructions": [
+        "Apoya manos y rodillas, con las manos bajo los hombros y las rodillas bajo las caderas.",
+        "Extiende un brazo y la pierna contraria sin girar el tronco ni arquear la espalda.",
+        "Vuelve a los cuatro apoyos con control y cambia de lado."
+      ],
+      "requirements": ["Superficie estable y espacio alrededor de manos y pies."],
+      "alternatives": [{"exerciseId": "plank", "reason": "Opción estática para la zona media, con apoyo de antebrazos."}],
+      "sources": [{"title": "Bird-dog", "publisher": "American Council on Exercise (ACE)", "url": "https://www.acefitness.org/resources/everyone/exercise-library/14/bird-dog/", "checkedOn": "2026-11-03"}],
+      "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Referencia consultada. Clasificación, redacción en español y alternativas pendientes de revisión editorial."}
+    },
+    {
+      "id": "knee-pushup", "name": "Flexiones con rodillas apoyadas",
+      "description": "Empuje de brazos desde el suelo con las rodillas como punto de apoyo.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["chest", "triceps"], "secondaryMuscles": ["shoulders", "core"],
+      "requiredEquipment": [], "optionalEquipment": ["mat"], "difficulty": "beginner",
+      "instructions": [
+        "Apoya manos y rodillas y forma una línea desde los hombros hasta las rodillas.",
+        "Dobla los codos acercando el pecho al suelo, con la cadera estable.",
+        "Empuja con las manos para volver al inicio sin perder la alineación."
+      ],
+      "requirements": ["Apoyo firme para manos y rodillas."],
+      "alternatives": [{"exerciseId": "pushup", "reason": "Variante con apoyo en los pies que desplaza más peso corporal."}, {"exerciseId": "wall-pushup", "reason": "Opción de pie que requiere una pared firme."}],
+      "sources": [{"title": "Bent Knee Push-up", "publisher": "American Council on Exercise (ACE)", "url": "https://www.acefitness.org/resources/everyone/exercise-library/13/bent-knee-push-up/", "checkedOn": "2026-11-03"}],
+      "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Referencia consultada. Clasificación, redacción en español y alternativas pendientes de revisión editorial."}
+    },
+    {
+      "id": "wall-pushup", "name": "Flexiones en pared",
+      "description": "Empuje de pie contra una pared fija.",
+      "modalities": ["home", "calisthenics"],
+      "primaryMuscles": ["chest", "triceps"], "secondaryMuscles": ["shoulders"],
+      "requiredEquipment": ["wall"], "optionalEquipment": [], "difficulty": "beginner",
+      "instructions": [
+        "Colócate frente a una pared firme y apoya las palmas a la altura del pecho.",
+        "Aleja ligeramente los pies y flexiona los codos para acercar el cuerpo manteniéndolo alineado.",
+        "Empuja la pared para regresar sin despegar los pies del suelo."
+      ],
+      "requirements": ["Pared fija que soporte el apoyo y suelo sin deslizamiento."],
+      "alternatives": [{"exerciseId": "knee-pushup", "reason": "Variante de suelo con apoyo de rodillas."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "side-plank", "name": "Plancha lateral",
+      "description": "Apoyo lateral estático sobre un antebrazo y el borde de los pies.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["core"], "secondaryMuscles": ["shoulders", "glutes"],
+      "requiredEquipment": [], "optionalEquipment": ["mat"], "difficulty": "intermediate",
+      "instructions": [
+        "Túmbate de lado y coloca el codo bajo el hombro, con las piernas extendidas.",
+        "Eleva la cadera apoyándote en el antebrazo y los pies, sin girar el tronco.",
+        "Respira mientras mantienes la posición y baja con control antes de cambiar de lado."
+      ],
+      "requirements": ["Apoyo firme para el antebrazo y espacio para extender las piernas."],
+      "alternatives": [{"exerciseId": "plank", "reason": "Variante frontal con apoyo de ambos antebrazos."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "calf-raise", "name": "Elevación de talones",
+      "description": "Elevación de ambos talones en posición de pie sobre suelo plano.",
+      "modalities": ["home", "calisthenics", "gym"],
+      "primaryMuscles": ["calves"], "secondaryMuscles": [],
+      "requiredEquipment": [], "optionalEquipment": ["wall"], "difficulty": "beginner",
+      "instructions": [
+        "Ponte de pie con los pies paralelos y el peso repartido.",
+        "Sube los talones de forma controlada, manteniendo el apoyo sobre la parte delantera de los pies.",
+        "Baja lentamente hasta apoyar los talones sin rebotar."
+      ],
+      "requirements": ["Suelo plano. Puedes usar una pared firme como apoyo de equilibrio."],
+      "alternatives": [], "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "pullup", "name": "Dominadas",
+      "description": "Tracción vertical del peso corporal desde una barra fija.",
+      "modalities": ["gym", "calisthenics", "home"],
+      "primaryMuscles": ["back"], "secondaryMuscles": ["biceps", "core"],
+      "requiredEquipment": ["pullUpBar"], "optionalEquipment": [], "difficulty": "advanced",
+      "instructions": [
+        "Sujeta una barra fija con las palmas orientadas hacia delante y los brazos extendidos.",
+        "Eleva el cuerpo acercando el pecho a la barra sin balanceos ni impulso de las piernas.",
+        "Desciende de forma controlada hasta recuperar la posición de brazos extendidos."
+      ],
+      "requirements": ["Barra anclada y dimensionada para soportar tu peso, con espacio libre debajo."],
+      "alternatives": [{"exerciseId": "lat-pulldown", "reason": "Tracción vertical en máquina con carga seleccionable; requiere polea alta."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "dumbbell-row", "name": "Remo con mancuerna",
+      "description": "Tracción de una mancuerna con una mano y apoyo en un banco.",
+      "modalities": ["gym", "home"],
+      "primaryMuscles": ["back"], "secondaryMuscles": ["biceps", "shoulders"],
+      "requiredEquipment": ["dumbbells", "bench"], "optionalEquipment": [], "difficulty": "intermediate",
+      "instructions": [
+        "Apoya una mano y una rodilla sobre un banco estable y sujeta la mancuerna con la mano contraria.",
+        "Con la espalda estable, lleva el codo hacia atrás acercando la mancuerna al costado.",
+        "Baja la mancuerna con control y completa el movimiento por ambos lados."
+      ],
+      "requirements": ["Banco que no se mueva y espacio para mover la mancuerna sin obstáculos."],
+      "alternatives": [{"exerciseId": "lat-pulldown", "reason": "Otro ejercicio de espalda, con dirección de tracción y equipo diferentes."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "goblet-squat", "name": "Sentadilla con mancuerna",
+      "description": "Sentadilla con una mancuerna sostenida delante del pecho.",
+      "modalities": ["gym", "home"],
+      "primaryMuscles": ["quadriceps", "glutes"], "secondaryMuscles": ["core"],
+      "requiredEquipment": ["dumbbells"], "optionalEquipment": [], "difficulty": "intermediate",
+      "instructions": [
+        "Sostén una mancuerna con ambas manos cerca del pecho y separa los pies de forma estable.",
+        "Flexiona caderas y rodillas manteniendo los talones apoyados y la carga cerca del cuerpo.",
+        "Extiende las piernas de forma controlada para regresar a la posición de pie."
+      ],
+      "requirements": ["Una mancuerna que puedas sostener con control y suelo despejado."],
+      "alternatives": [{"exerciseId": "squat", "reason": "El mismo patrón general sin carga externa."}, {"exerciseId": "leg-press", "reason": "Trabajo de piernas en máquina; el patrón y los apoyos son distintos."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "floor-press", "name": "Press de pecho en suelo",
+      "description": "Empuje de dos mancuernas tumbado boca arriba sobre el suelo.",
+      "modalities": ["gym", "home"],
+      "primaryMuscles": ["chest", "triceps"], "secondaryMuscles": ["shoulders"],
+      "requiredEquipment": ["dumbbells"], "optionalEquipment": ["mat"], "difficulty": "intermediate",
+      "instructions": [
+        "Túmbate boca arriba con las rodillas flexionadas y una mancuerna en cada mano junto al pecho.",
+        "Empuja las mancuernas hacia arriba manteniendo las muñecas alineadas con los antebrazos.",
+        "Baja lentamente hasta apoyar suavemente la parte posterior de los brazos en el suelo."
+      ],
+      "requirements": ["Espacio para tumbarte y colocar las cargas a ambos lados con control."],
+      "alternatives": [{"exerciseId": "pushup", "reason": "Empuje horizontal con peso corporal y sin mancuernas."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "shoulder-press", "name": "Press de hombros con mancuernas",
+      "description": "Empuje vertical de dos mancuernas desde la altura de los hombros.",
+      "modalities": ["gym", "home"],
+      "primaryMuscles": ["shoulders"], "secondaryMuscles": ["triceps", "core"],
+      "requiredEquipment": ["dumbbells"], "optionalEquipment": [], "difficulty": "intermediate",
+      "instructions": [
+        "De pie, sujeta las mancuernas a la altura de los hombros con una base estable.",
+        "Extiende los brazos hacia arriba sin inclinar el tronco hacia atrás.",
+        "Baja las mancuernas lentamente hasta la altura inicial."
+      ],
+      "requirements": ["Altura libre suficiente sobre la cabeza y cargas que puedas controlar."],
+      "alternatives": [], "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "biceps-curl", "name": "Curl de bíceps con mancuernas",
+      "description": "Flexión de codos de pie con una mancuerna en cada mano.",
+      "modalities": ["gym", "home"],
+      "primaryMuscles": ["biceps"], "secondaryMuscles": [],
+      "requiredEquipment": ["dumbbells"], "optionalEquipment": [], "difficulty": "beginner",
+      "instructions": [
+        "Colócate de pie con las mancuernas a los lados y las palmas orientadas hacia delante.",
+        "Flexiona los codos manteniéndolos cerca del tronco, sin balancear el cuerpo.",
+        "Baja las mancuernas despacio hasta extender de nuevo los brazos."
+      ],
+      "requirements": ["Espacio libre a los lados y mancuernas con agarre firme."],
+      "alternatives": [], "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "lat-pulldown", "name": "Jalón al pecho en polea",
+      "description": "Tracción vertical de una barra conectada a una polea alta.",
+      "modalities": ["gym"],
+      "primaryMuscles": ["back"], "secondaryMuscles": ["biceps"],
+      "requiredEquipment": ["cableMachine"], "optionalEquipment": [], "difficulty": "intermediate",
+      "instructions": [
+        "Ajusta el asiento y el soporte de muslos de la máquina y toma la barra con ambas manos.",
+        "Lleva la barra hacia la parte alta del pecho manteniendo el tronco estable, sin tirar detrás de la cabeza.",
+        "Permite que la barra suba de forma controlada hasta extender los brazos."
+      ],
+      "requirements": ["Máquina en buen estado, pasador de carga bien colocado y ajustes adecuados al tamaño corporal."],
+      "alternatives": [{"exerciseId": "pullup", "reason": "Tracción vertical con peso corporal; requiere barra fija y mayor capacidad de tracción."}, {"exerciseId": "dumbbell-row", "reason": "Trabajo de espalda con mancuerna y banco, mediante tracción horizontal."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    },
+    {
+      "id": "leg-press", "name": "Prensa de piernas",
+      "description": "Empuje con las piernas en una máquina con respaldo y plataforma.",
+      "modalities": ["gym"],
+      "primaryMuscles": ["quadriceps", "glutes"], "secondaryMuscles": ["hamstrings"],
+      "requiredEquipment": ["legPressMachine"], "optionalEquipment": [], "difficulty": "intermediate",
+      "instructions": [
+        "Ajusta el asiento y coloca los pies sobre la plataforma, siguiendo las indicaciones de la máquina.",
+        "Flexiona las piernas con control sin despegar la pelvis del respaldo.",
+        "Empuja la plataforma para extender las piernas sin bloquear bruscamente las rodillas."
+      ],
+      "requirements": ["Conocer el mecanismo de seguridad de la máquina y mantener los topes configurados."],
+      "alternatives": [{"exerciseId": "squat", "reason": "Trabajo general de piernas sin máquina, con equilibrio y apoyos distintos."}],
+      "sources": [], "resources": [],
+      "editorial": {"status": "pending", "updatedOn": "2026-11-03", "reviewer": null, "reviewedOn": null, "notes": "Falta incorporar una referencia verificada y completar la revisión editorial."}
+    }
+  ]
+}

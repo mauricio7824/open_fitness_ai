@@ -6,13 +6,19 @@ import 'package:open_fitness_ai/core/models/fitness_models.dart';
 import 'package:open_fitness_ai/core/state/fitness_controller.dart';
 
 import 'support/memory_fitness_store.dart';
+import 'support/test_exercise_catalog.dart';
 
 void main() {
   late MemoryFitnessStore store;
   late FitnessController controller;
+  late List<Workout> workouts;
   setUp(() {
     store = MemoryFitnessStore();
-    controller = FitnessController(store);
+    controller = FitnessController(
+      store,
+      exerciseRepository: TestExerciseRepository(),
+    );
+    workouts = buildWorkouts(testExerciseCatalog);
   });
   tearDown(() => controller.dispose());
 
@@ -22,7 +28,7 @@ void main() {
     controller.toggleMove(0);
     expect(await controller.finishWorkout(), isFalse);
     controller.startWorkout(workouts.last);
-    expect(controller.activeSession!.workout, workouts.first);
+    expect(controller.activeSession!.workout.id, workouts.first.id);
     for (var index = 1; index < workouts.first.moves.length; index++) {
       controller.toggleMove(index);
     }

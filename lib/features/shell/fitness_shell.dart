@@ -80,7 +80,7 @@ class _FitnessShellState extends State<FitnessShell> {
         children: [
           HomePage(controller: widget.controller, onWorkouts: () => _select(1)),
           WorkoutsPage(controller: widget.controller),
-          const ExercisesPage(),
+          ExercisesPage(catalog: widget.controller.catalog),
           ProgressPage(
             controller: widget.controller,
             onWorkouts: () => _select(1),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../core/data/fitness_catalog.dart';
 import '../../core/state/fitness_controller.dart';
 import '../../shared/widgets/fitness_widgets.dart';
 import '../workouts/workout_session_page.dart';
@@ -18,6 +17,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final active = controller.activeSession;
+    final workouts = controller.workouts;
     return PageContent(
       children: [
         const PageHeading(

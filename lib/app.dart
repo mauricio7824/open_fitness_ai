@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/data/fitness_store.dart';
+import 'core/data/exercise_repository.dart';
 import 'core/state/fitness_controller.dart';
 import 'core/theme/app_theme.dart';
 import 'features/shell/fitness_shell.dart';
 import 'shared/widgets/fitness_widgets.dart';
 
 class OpenFitnessApp extends StatefulWidget {
-  const OpenFitnessApp({super.key, required this.store});
+  const OpenFitnessApp({
+    super.key,
+    required this.store,
+    this.exerciseRepository,
+  });
   final FitnessStore store;
+  final ExerciseRepository? exerciseRepository;
   @override
   State<OpenFitnessApp> createState() => _OpenFitnessAppState();
 }
@@ -19,7 +25,10 @@ class _OpenFitnessAppState extends State<OpenFitnessApp> {
   @override
   void initState() {
     super.initState();
-    _controller = FitnessController(widget.store)..initialize();
+    _controller = FitnessController(
+      widget.store,
+      exerciseRepository: widget.exerciseRepository,
+    )..initialize();
   }
 
   @override

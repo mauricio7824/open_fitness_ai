@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../core/data/fitness_catalog.dart';
 import '../../core/state/fitness_controller.dart';
 import '../../shared/widgets/fitness_widgets.dart';
 import 'workout_session_page.dart';
@@ -47,7 +46,7 @@ class WorkoutsPage extends StatelessWidget {
       ],
       AdaptiveCards(
         children: [
-          for (final workout in workouts)
+          for (final workout in controller.workouts)
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(24),
