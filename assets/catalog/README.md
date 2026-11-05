@@ -1,5 +1,7 @@
 # Catálogo local de ejercicios
 
+La fase [4C: recursos visuales](../../docs/exercise_media.md) amplía el contrato de `resources` con IDs, imágenes e ilustraciones locales, secuencias por fases, metadatos para video, atribución, accesibilidad y revisión independiente. El catálogo distribuido conserva `resources: []` en las 18 fichas: no se han incorporado archivos de terceros. La guía explica el esquema, los formatos y el proceso de aportación y revisión.
+
 El catálogo universal de equipamiento está en `equipment.v1.json`; su esquema, normalización, migración y motor de compatibilidad se documentan en [la guía de fase 4A](../../docs/equipment.md). Las 18 fichas de `exercises.v1.json` conservan su información previa y añaden [técnica y enseñanza en la fase 4B](../../docs/exercise_technique.md). Pueden declarar requisitos estructurados explícitos mediante `equipmentRequirements`; si el campo falta, se interpretan sus listas de equipo anteriores.
 
 `exercises.v1.json` se incluye como asset en `pubspec.yaml`. No depende de red, de una cuenta ni de una caché descargada previamente. `AssetExerciseRepository` lo lee; `ExerciseCatalog` valida el esquema y produce objetos inmutables. El repositorio conserva solo lecturas correctas y permite reintentar tras un error.
@@ -37,7 +39,7 @@ Una fuente contiene `title`, `publisher`, `url` HTTPS y `checkedOn` en formato `
 
 Antes de añadir una referencia, abre la página original, comprueba que describe el movimiento concreto y registra la fecha real. No deduzcas URLs ni inventes fechas, autores o publicaciones. Si falta verificación, deja la lista vacía y mantén la revisión pendiente. Las seis fuentes iniciales conservan su registro del 3 de noviembre de 2026 y se reconsultaron el día 4. Las doce referencias restantes y las orientaciones comunes se consultaron el 4 de noviembre de 2026.
 
-Un recurso necesita `kind` (`image` o `video`), `assetPath` dentro de `assets/`, `creator`, `sourceUrl`, `license` y `licenseUrl`. Además hay que incluir el archivo en el bundle, comprobar sus derechos de redistribución y añadir su renderizado: esta fase solo prepara los metadatos, no un visor multimedia. Una referencia bibliográfica no autoriza a descargar ni redistribuir sus fotos o videos.
+Un recurso requiere el [contrato de 4C](../../docs/exercise_media.md#contrato-del-recurso): `id`, `title`, tipo, ubicación, autoría, fuente, licencia, evidencia de permiso, atribución, texto alternativo y revisión propia. Las secuencias declaran fases con descripciones. Hay visor local de imágenes estáticas; la reproducción de video queda pendiente. Debe incluirse cada archivo en el bundle y comprobar sus derechos antes de distribuirlo. Una referencia bibliográfica no autoriza a descargar ni redistribuir sus fotos o videos.
 
 `editorial` incluye:
 

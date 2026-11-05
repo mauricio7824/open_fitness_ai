@@ -1,5 +1,9 @@
 # Open Fitness AI
 
+La fase **4C** prepara una [infraestructura de demostraciones visuales](docs/exercise_media.md): imágenes e ilustraciones locales, secuencias manuales, atribución y revisión por recurso, validación de archivos y estados de carga/error. Los videos tienen un contrato extensible y transcripción, con reproducción pendiente. Las 18 fichas muestran «Demostración visual» y mantienen sus instrucciones sin conexión. No se incorporan recursos de terceros ni dependencias nuevas; el catálogo público sigue sin archivos multimedia.
+
+Verificación de 4C: `flutter analyze --no-pub` sin incidencias, **224 pruebas aprobadas** (162 existentes y 62 nuevas) y APK Android de depuración compilado correctamente. Se usó el procedimiento de paquetes originales del proyecto y lanzadores temporales dentro de `.dart_tool` para omitir actualizaciones del SDK. La guía de recursos visuales detalla la ejecución, el artefacto y los límites de verificación.
+
 La fase **4B** amplía las [18 fichas con técnica y enseñanza de ejercicios](docs/exercise_technique.md): preparación, pasos, respiración, control, errores observables, consejos, variantes de menor dificultad, progresiones y precauciones. Incluye señales de parada visibles y referencias consultadas para todos los ejercicios. Las 18 fichas siguen pendientes de revisión editorial. Conserva los datos previos, el catálogo de 84 equipos, el perfil, el historial y el funcionamiento sin conexión; no añade dependencias ni multimedia.
 
 Verificación de 4B: análisis estático con `dart analyze --fatal-infos` sin incidencias y **162 pruebas aprobadas** (124 existentes y 38 nuevas), con código 0. Las pruebas recorren las secciones de las 18 fichas a 320 × 568, texto al 200 % y temas claro/oscuro. Se utilizaron copias originales de paquetes dentro de `.dart_tool` y un lanzador temporal sin actualización de caché; consulta la guía de técnica para los detalles del entorno y los límites de esta verificación.
@@ -66,9 +70,9 @@ Las seis referencias registradas se consultaron el 3 de noviembre de 2026 en la 
 
 La fase 4B reconsultó esas seis referencias y completó las otras doce el 4 de noviembre de 2026. Consulta la [relación de fuentes y su alcance](docs/exercise_technique.md). La redacción en español, las categorías, variantes y alternativas están pendientes de revisión editorial en los **18 ejercicios**; ninguno figura firmado ni aprobado. Las alternativas son opciones para comparar, no sustituciones personalizadas ni tratamientos.
 
-No se incorporaron fotos ni videos. El modelo reserva metadatos de autoría, origen y licencia para futuros recursos locales. No se asigna ninguna licencia ficticia. Las URL de las fuentes son seleccionables para copiarlas; su consulta externa necesita conexión, pero el contenido del ejercicio permanece disponible sin ella.
+No se incorporaron fotos ni videos. La fase 4C amplía los metadatos de autoría, origen, licencia, atribución, texto alternativo y revisión, y añade un visor de imágenes locales y secuencias. No se asigna ninguna licencia a un recurso inexistente. Las URL de las fuentes son seleccionables para copiarlas; su consulta externa necesita conexión, pero el contenido del ejercicio permanece disponible sin ella.
 
-Pendiente de futuras fases: revisión editorial y técnica cualificada y, en la fase 4C, recursos multimedia con autorización y su visualización. La edición/importación de catálogos desde la interfaz y las actualizaciones remotas no están implementadas.
+Pendiente de futuras fases: aportar demostraciones autorizadas, revisión editorial y técnica cualificada y un adaptador accesible de reproducción de video. La edición/importación de catálogos desde la interfaz y las actualizaciones remotas no están implementadas.
 
 ## Desarrollo
 
