@@ -5,6 +5,8 @@ import 'equipment.dart';
 import 'equipment_requirements.dart';
 export 'training_modality.dart';
 
+part 'exercise_resource.dart';
+
 enum MuscleGroup {
   quadriceps('Cuádriceps'),
   glutes('Glúteos'),
@@ -76,42 +78,6 @@ class ExerciseSource {
         _date(json, 'checkedOn'),
         json.containsKey('scope') ? _text(json, 'scope') : null,
       );
-}
-
-class ExerciseResource {
-  ExerciseResource._(
-    this.kind,
-    this.assetPath,
-    this.creator,
-    this.sourceUrl,
-    this.license,
-    this.licenseUrl,
-  );
-  final String kind;
-  final String assetPath;
-  final String creator;
-  final Uri sourceUrl;
-  final String license;
-  final Uri licenseUrl;
-
-  factory ExerciseResource.fromJson(Map<String, dynamic> json) {
-    final kind = _text(json, 'kind');
-    final path = _text(json, 'assetPath');
-    if (!['image', 'video'].contains(kind) ||
-        !path.startsWith('assets/') ||
-        path.contains('..') ||
-        path.contains('\\')) {
-      throw const FormatException('Tipo o ruta de recurso inválidos.');
-    }
-    return ExerciseResource._(
-      kind,
-      path,
-      _text(json, 'creator'),
-      _url(json, 'sourceUrl'),
-      _text(json, 'license'),
-      _url(json, 'licenseUrl'),
-    );
-  }
 }
 
 class EditorialReview {
@@ -437,6 +403,13 @@ class ExerciseCatalog {
           exercise.sources.length) {
         throw FormatException('Fuentes repetidas para ${exercise.id}.');
       }
+    }
+    final resourceIds = exercises
+        .expand((exercise) => exercise.resources)
+        .map((resource) => resource.id)
+        .toList();
+    if (resourceIds.toSet().length != resourceIds.length) {
+      throw const FormatException('Identificadores de recursos repetidos.');
     }
     return ExerciseCatalog._(
       json['catalogVersion'] as int,

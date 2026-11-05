@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 
 import '../../core/models/exercise.dart';
+import '../../core/data/exercise_media_repository.dart';
 import '../../shared/widgets/fitness_widgets.dart';
 import '../../core/state/fitness_controller.dart';
 import '../../shared/widgets/equipment_compatibility.dart';
 import '../profile/inventory_editor_page.dart';
 import 'exercise_filter.dart';
 import 'exercise_technique_sections.dart';
+import 'exercise_visual_demo.dart';
 
 Future<void> showExerciseDetails(
   BuildContext context,
   Exercise exercise, {
   required ExerciseCatalog catalog,
   FitnessController? controller,
+  ExerciseMediaLoader? mediaLoader,
 }) => Navigator.of(context).push(
   MaterialPageRoute<void>(
     builder: (_) => ExerciseDetailPage(
       exercise: exercise,
       catalog: catalog,
       controller: controller,
+      mediaLoader: mediaLoader,
     ),
   ),
 );
@@ -29,10 +33,12 @@ class ExerciseDetailPage extends StatelessWidget {
     required this.exercise,
     required this.catalog,
     this.controller,
+    this.mediaLoader,
   });
   final Exercise exercise;
   final ExerciseCatalog catalog;
   final FitnessController? controller;
+  final ExerciseMediaLoader? mediaLoader;
 
   @override
   Widget build(BuildContext context) => controller == null
@@ -118,6 +124,11 @@ class ExerciseDetailPage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Text('• $requirement'),
               ),
+            ExerciseVisualDemo(
+              key: ValueKey('visual-demo-${exercise.id}'),
+              resources: exercise.resources,
+              loader: mediaLoader,
+            ),
             if (exercise.technique case final technique?) ...[
               ExerciseTechniqueSections(
                 key: ValueKey('technique-${exercise.id}'),
@@ -204,6 +215,7 @@ class ExerciseDetailPage extends StatelessWidget {
                       catalog.requireById(alternative.exerciseId),
                       catalog: catalog,
                       controller: controller,
+                      mediaLoader: mediaLoader,
                     ),
                   ),
                 ),
@@ -266,13 +278,9 @@ class ExerciseDetailPage extends StatelessWidget {
                 'No hay imágenes ni videos asociados a este ejercicio.',
               )
             else
-              for (final resource in exercise.resources) ...[
-                Text(
-                  'Autoría: ${resource.creator} · Licencia: ${resource.license}',
-                ),
-                SelectableText(resource.licenseUrl.toString()),
-                SelectableText(resource.sourceUrl.toString()),
-              ],
+              const Text(
+                'La autoría, la atribución, las licencias y la revisión se muestran al abrir cada recurso en «Demostración visual».',
+              ),
             const SizedBox(height: 24),
             Align(
               alignment: Alignment.centerRight,
