@@ -7,9 +7,15 @@ import '../../core/models/exercise.dart';
 import '../../shared/widgets/fitness_widgets.dart';
 
 class ExerciseVisualDemo extends StatefulWidget {
-  const ExerciseVisualDemo({super.key, required this.resources, this.loader});
+  const ExerciseVisualDemo({
+    super.key,
+    required this.resources,
+    this.loader,
+    this.illustrationPlan,
+  });
   final List<ExerciseResource> resources;
   final ExerciseMediaLoader? loader;
+  final ExerciseIllustrationPlan? illustrationPlan;
 
   @override
   State<ExerciseVisualDemo> createState() => _ExerciseVisualDemoState();
@@ -36,8 +42,17 @@ class _ExerciseVisualDemoState extends State<ExerciseVisualDemo> {
         const Card(
           child: Padding(
             padding: EdgeInsets.all(16),
-            child: Text(
-              'Todavía no hay una demostración visual disponible. Puedes consultar la preparación y los pasos de este ejercicio sin conexión.',
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Este ejercicio todavía no tiene una demostración visual disponible.',
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Puedes consultar la preparación y los pasos de este ejercicio sin conexión.',
+                ),
+              ],
             ),
           ),
         )
@@ -52,6 +67,30 @@ class _ExerciseVisualDemoState extends State<ExerciseVisualDemo> {
             loader: _loader,
           ),
       ],
+      if (widget.illustrationPlan case final plan?)
+        if (!widget.resources.any((resource) => resource.id == plan.resourceId))
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Ilustraciones pendientes',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Se han preparado tres fases para ilustrar. Los archivos originales todavía no están disponibles; este guion no es una demostración visual.',
+                  ),
+                  for (final phase in plan.phases) ...[
+                    const SizedBox(height: 12),
+                    Text('${phase.title}: ${phase.description}'),
+                  ],
+                ],
+              ),
+            ),
+          ),
     ],
   );
 }
@@ -92,12 +131,15 @@ class _ResourceCardState extends State<_ResourceCard> {
     final sequence = resource.kind == ExerciseResourceKind.imageSequence;
     final frame = sequence ? resource.frames[_index] : null;
     final pending = resource.editorial.status == EditorialStatus.pending;
+    final technical = resource.technicalReview;
+    final technicallyReviewed =
+        technical?.status == TechnicalReviewStatus.reviewed;
     return Card(
       child: ExpansionTile(
         key: ValueKey('media-${resource.id}'),
         title: Text(resource.title),
         subtitle: Text(
-          '${resource.kind.label} · ${pending ? 'Revisión pendiente' : 'Revisado editorialmente'}',
+          '${resource.kind.label} · ${pending ? 'Revisión editorial pendiente' : 'Revisado editorialmente'} · ${technicallyReviewed ? 'Revisión técnica registrada' : 'Revisión técnica pendiente'}',
         ),
         onExpansionChanged: (value) => setState(() => _expanded = value),
         childrenPadding: const EdgeInsets.all(16),
@@ -106,9 +148,15 @@ class _ResourceCardState extends State<_ResourceCard> {
             ? [
                 Text(
                   pending
-                      ? 'Recurso pendiente de revisión editorial. No validado técnicamente.'
-                      : 'Recurso revisado editorialmente. No evalúa tu técnica personal.',
+                      ? 'Recurso pendiente de revisión editorial.'
+                      : 'Recurso revisado editorialmente.',
                   style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  technicallyReviewed
+                      ? 'Revisión técnica registrada. Este recurso no evalúa tu técnica personal.'
+                      : 'Revisión técnica pendiente. No validado técnicamente.',
                 ),
                 const SizedBox(height: 12),
                 Text(resource.altText),
@@ -185,6 +233,20 @@ class _ResourceCardState extends State<_ResourceCard> {
                   Text(
                     'Revisión: $reviewer · ${formatDate(context, resource.editorial.reviewedOn!)}',
                   ),
+                if (technical != null) ...[
+                  const SizedBox(height: 12),
+                  Text(
+                    'Revisión técnica: ${technical.status == TechnicalReviewStatus.reviewed ? 'registrada' : 'pendiente'}',
+                  ),
+                  Text(technical.notes),
+                  Text(
+                    'Contenido técnico actualizado: ${formatDate(context, technical.updatedOn)}',
+                  ),
+                  if (technical.reviewer case final reviewer?)
+                    Text(
+                      'Responsable técnico: $reviewer · ${formatDate(context, technical.reviewedOn!)}',
+                    ),
+                ],
                 const SizedBox(height: 8),
                 const Text(
                   'Las instrucciones escritas siguen disponibles aunque el recurso visual no pueda mostrarse.',

@@ -10,7 +10,7 @@ El catálogo universal de equipamiento está en `equipment.v1.json`; su esquema,
 
 La raíz exige `schemaVersion: 1`, `catalogVersion` entero positivo y `exercises`, una lista no vacía. Cambia `catalogVersion` al actualizar el contenido. Un cambio incompatible de estructura necesita un nuevo esquema y adaptación del decodificador.
 
-La versión actual del contenido es **2**. Añade los campos opcionales `technique` por ejercicio y `teachingGuidance` en la raíz, conservando la lectura del formato previo. Si están presentes se exige su contenido completo; el asset actual incluye ambos en todas las fichas. La [guía de técnica](../../docs/exercise_technique.md) detalla sus campos y validación.
+La versión actual del contenido es **3**. Conserva los campos opcionales `technique` por ejercicio y `teachingGuidance` en la raíz, con lectura del formato previo. Si están presentes se exige su contenido completo; el asset actual incluye ambos en todas las fichas. La [guía de técnica](../../docs/exercise_technique.md) detalla sus campos y validación. La versión 3 añade `illustrationPlan` a `squat`, `pushup` y `biceps-curl`: son especificaciones de tres archivos pendientes, separadas de `resources`, que sigue vacío. La [guía de ilustraciones](../../docs/exercise_illustrations.md) explica cómo vincular futuros archivos reales por ID y registrar su revisión técnica independiente.
 
 Cada ejercicio requiere:
 

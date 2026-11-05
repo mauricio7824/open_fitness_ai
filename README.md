@@ -1,5 +1,9 @@
 # Open Fitness AI
 
+La fase **4C.2** prepara [secuencias ilustradas originales](docs/exercise_illustrations.md) para Sentadilla, Flexiones y Curl de bíceps. «Demostración visual» se sitúa después de los requisitos y antes de la preparación técnica, y distingue los guiones preparados de los recursos disponibles. Se añade revisión técnica independiente. **Faltan los nueve archivos originales**: las 18 fichas siguen sin recursos multimedia vinculados, sin autorías, licencias o validaciones inventadas. No hay dependencias nuevas.
+
+Verificación actual de 4C.2: `flutter analyze --no-pub` sin incidencias, **256 pruebas aprobadas** y APK Android de depuración compilado e instalado como actualización sin borrar datos. La [corrección de integración multimedia](docs/multimedia_integration.md) documenta el APK antiguo encontrado, las huellas de los artefactos y la comprobación de la instalación actual.
+
 La fase **4C** prepara una [infraestructura de demostraciones visuales](docs/exercise_media.md): imágenes e ilustraciones locales, secuencias manuales, atribución y revisión por recurso, validación de archivos y estados de carga/error. Los videos tienen un contrato extensible y transcripción, con reproducción pendiente. Las 18 fichas muestran «Demostración visual» y mantienen sus instrucciones sin conexión. No se incorporan recursos de terceros ni dependencias nuevas; el catálogo público sigue sin archivos multimedia.
 
 Verificación de 4C: `flutter analyze --no-pub` sin incidencias, **224 pruebas aprobadas** (162 existentes y 62 nuevas) y APK Android de depuración compilado correctamente. Se usó el procedimiento de paquetes originales del proyecto y lanzadores temporales dentro de `.dart_tool` para omitir actualizaciones del SDK. La guía de recursos visuales detalla la ejecución, el artefacto y los límites de verificación.

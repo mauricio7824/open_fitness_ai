@@ -37,7 +37,7 @@ void main() {
   test('El catálogo local está empaquetado y se puede cargar sin servicios remotos', () async {
     final loaded = await AssetExerciseRepository().load();
     expect(loaded.exercises.length, 18);
-    expect(loaded.version, 2);
+    expect(loaded.version, 3);
   });
 
   test('El repositorio conserva la instantánea en memoria', () async {

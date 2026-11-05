@@ -10,6 +10,38 @@ enum ExerciseResourceKind {
   final String label;
 }
 
+enum TechnicalReviewStatus { pending, reviewed }
+
+class TechnicalReview {
+  TechnicalReview._(
+    this.status,
+    this.updatedOn,
+    this.reviewer,
+    this.reviewedOn,
+    this.notes,
+  );
+  final TechnicalReviewStatus status;
+  final DateTime updatedOn;
+  final String? reviewer;
+  final DateTime? reviewedOn;
+  final String notes;
+
+  factory TechnicalReview.fromJson(Map<String, dynamic> json) {
+    // Date/signature integrity follows the same rules as editorial review;
+    // the records and statuses remain independent.
+    final review = EditorialReview.fromJson(json);
+    return TechnicalReview._(
+      review.status == EditorialStatus.reviewed
+          ? TechnicalReviewStatus.reviewed
+          : TechnicalReviewStatus.pending,
+      review.updatedOn,
+      review.reviewer,
+      review.reviewedOn,
+      review.notes,
+    );
+  }
+}
+
 /// Describes a location only. An HTTPS URL never authorizes a download.
 class ExerciseMediaLocation {
   ExerciseMediaLocation._(this.assetPath, this.url);
@@ -73,6 +105,7 @@ class ExerciseResource {
     required this.attribution,
     required this.altText,
     required this.editorial,
+    required this.technicalReview,
     required this.durationSeconds,
     required this.transcript,
     required this.captionsAssetPath,
@@ -91,6 +124,9 @@ class ExerciseResource {
   final String attribution;
   final String altText;
   final EditorialReview editorial;
+
+  /// Missing in older resources means that no technical review is recorded.
+  final TechnicalReview? technicalReview;
   final int? durationSeconds;
   final String? transcript;
   final String? captionsAssetPath;
@@ -157,6 +193,17 @@ class ExerciseResource {
         'Licencia o enlace de licencia no admitidos.',
       );
     }
+    final editorial = EditorialReview.fromJson(_object(json['editorial']));
+    final technicalReview = json.containsKey('technicalReview')
+        ? TechnicalReview.fromJson(_object(json['technicalReview']))
+        : null;
+    if (technicalReview != null &&
+        technicalReview.status == TechnicalReviewStatus.reviewed &&
+        technicalReview.reviewedOn!.isBefore(editorial.updatedOn)) {
+      throw const FormatException(
+        'La revisión técnica es anterior al contenido del recurso.',
+      );
+    }
     return ExerciseResource._(
       id: _mediaId(json),
       title: _text(json, 'title'),
@@ -172,7 +219,8 @@ class ExerciseResource {
       permissionNote: _text(json, 'permissionNote'),
       attribution: _text(json, 'attribution'),
       altText: _text(json, 'altText'),
-      editorial: EditorialReview.fromJson(_object(json['editorial'])),
+      editorial: editorial,
+      technicalReview: technicalReview,
       durationSeconds: duration as int?,
       transcript: video ? _text(json, 'transcript') : null,
       captionsAssetPath: captions,

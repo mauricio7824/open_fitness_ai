@@ -127,6 +127,7 @@ class ExerciseDetailPage extends StatelessWidget {
             ExerciseVisualDemo(
               key: ValueKey('visual-demo-${exercise.id}'),
               resources: exercise.resources,
+              illustrationPlan: exercise.illustrationPlan,
               loader: mediaLoader,
             ),
             if (exercise.technique case final technique?) ...[

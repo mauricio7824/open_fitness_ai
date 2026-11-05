@@ -6,6 +6,10 @@ Esta fase prepara la infraestructura multimedia. Los 18 ejercicios mantienen tod
 
 Cada ficha incluye «Demostración visual». Si no hay recursos, se indica su ausencia y se remite a las instrucciones disponibles sin conexión. Cada recurso se abre por separado; las imágenes se cargan solo al abrirlo. Las secuencias tienen controles de fase anterior/siguiente, descripción de cada fase y contador anunciado por accesibilidad. No avanzan solas ni reproducen animaciones.
 
+La sección se incluye siempre en `ExerciseDetailPage`, incluso con `resources: []`. Se sitúa inmediatamente después del resumen, músculos y requisitos, antes de «Posición inicial y preparación». El estado vacío muestra «Este ejercicio todavía no tiene una demostración visual disponible.», seguido del recordatorio de acceso a los pasos sin conexión. El repositorio multimedia no condiciona la presencia de esta sección. Las pruebas de integración comprueban la visibilidad al desplazarse en las 18 fichas sin recursos, en ambos temas con texto al 200 %, y la apertura de Sentadilla desde la biblioteca. «Recursos y licencias» permanece al final para la atribución, separada de la demostración educativa.
+
+La [fase 4C.2](exercise_illustrations.md) añade planes de tres fases para Sentadilla, Flexiones y Curl de bíceps, sin registrar imágenes inexistentes como recursos, y una revisión técnica independiente de la editorial. El [inventario de archivos pendientes](../assets/exercise_media/README.md) enumera las nueve ilustraciones que faltan. El catálogo actual sigue sin demostraciones originales disponibles.
+
 Las imágenes locales usan `Image.memory`, se muestran completas sin recortarse y tienen una descripción equivalente visible y accesible. Se usan colores del tema, botones estándar y contenido que ajusta sus líneas. Los estados de carga, error y reintento se expresan mediante texto. Una imagen ausente o dañada no impide consultar la descripción ni las instrucciones y no bloquea la inicialización de la aplicación.
 
 Las URL se conservan como referencias seleccionables, sin descargarlas, abrirlas ni solicitar red automáticamente. No existe todavía un flujo de descarga, caché remota o consentimiento para recursos externos. Para disponer de una imagen sin conexión debe incorporarse al bundle local con autorización.
@@ -29,6 +33,7 @@ El campo `resources` de cada ejercicio admite objetos con estos metadatos. Las l
 | `attribution` | Crédito completo que se mostrará al usuario, incluidas modificaciones cuando corresponda. |
 | `altText` | Descripción textual útil de lo que muestra el recurso. No basta «imagen del ejercicio». |
 | `editorial` | Estado y fechas de revisión del recurso, independientes de los del texto del ejercicio. |
+| `technicalReview` | Revisión técnica independiente; si falta en un recurso anterior, se considera no registrada. Es explícita en las nuevas secuencias que implementan los planes de 4C.2. |
 
 Las rutas locales se limitan a `assets/exercise_media/`, con carpetas y nombres de letras ASCII, números, guion o guion bajo. No se permiten rutas absolutas, traversal, barras invertidas, espacios, parámetros ni segmentos codificados. Se admiten PNG, JPG/JPEG y WebP estáticos; las ilustraciones utilizan esos mismos formatos. SVG y GIF no tienen adaptador en esta fase.
 
@@ -122,7 +127,9 @@ flutter build apk --debug --no-pub --target-platform android-x64
 
 Consultar también la [particularidad del entorno de Flutter](../README.md#particularidad-del-sdk-de-esta-máquina). No ejecutar `flutter pub get` después de preparar las copias salvo que sea necesario; si se regenera la configuración, volver a ejecutar el script. La documentación de Flutter explica [cómo declarar assets](https://docs.flutter.dev/ui/assets/assets-and-images) y el [manifiesto de assets](https://api.flutter.dev/flutter/services/AssetManifest-class.html).
 
-### Resultado de esta fase
+### Resultado original de 4C
+
+La verificación posterior de 4C.2 está registrada en [la guía de secuencias ilustradas](exercise_illustrations.md#verificación-inicial-de-4c2). El diagnóstico del APK antiguo y la instalación actual se documentan en [la corrección de integración multimedia](multimedia_integration.md).
 
 - `flutter analyze --no-pub`: sin incidencias, código de salida 0.
 - `flutter test --no-pub`: **224 pruebas aprobadas**, código 0: 162 existentes y 62 nuevas de multimedia. Las 62 nuevas también pasaron en la ejecución específica previa.

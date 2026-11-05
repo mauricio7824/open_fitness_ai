@@ -6,6 +6,7 @@ import 'equipment_requirements.dart';
 export 'training_modality.dart';
 
 part 'exercise_resource.dart';
+part 'exercise_illustration_plan.dart';
 
 enum MuscleGroup {
   quadriceps('Cuádriceps'),
@@ -229,6 +230,7 @@ class Exercise {
     required this.editorial,
     required this.equipmentRequirements,
     required this.technique,
+    required this.illustrationPlan,
   });
 
   final String id;
@@ -248,6 +250,7 @@ class Exercise {
   final EditorialReview editorial;
   final EquipmentRequirements equipmentRequirements;
   final ExerciseTechnique? technique;
+  final ExerciseIllustrationPlan? illustrationPlan;
 
   String get equipmentLabel => requiredEquipment.isEmpty
       ? 'Sin material'
@@ -317,6 +320,9 @@ class Exercise {
       equipmentRequirements: equipmentRequirements,
       technique: json.containsKey('technique')
           ? ExerciseTechnique.fromJson(_object(json['technique']))
+          : null,
+      illustrationPlan: json.containsKey('illustrationPlan')
+          ? ExerciseIllustrationPlan.fromJson(_object(json['illustrationPlan']))
           : null,
     );
   }
@@ -410,6 +416,42 @@ class ExerciseCatalog {
         .toList();
     if (resourceIds.toSet().length != resourceIds.length) {
       throw const FormatException('Identificadores de recursos repetidos.');
+    }
+    final plans = exercises.where(
+      (exercise) => exercise.illustrationPlan != null,
+    );
+    if (plans
+            .map((exercise) => exercise.illustrationPlan!.resourceId)
+            .toSet()
+            .length !=
+        plans.length) {
+      throw const FormatException(
+        'Identificadores de planes ilustrados repetidos.',
+      );
+    }
+    for (final exercise in plans) {
+      final plan = exercise.illustrationPlan!;
+      if (plan.phases.any(
+        (phase) => !phase.expectedAssetPath.startsWith(
+          'assets/exercise_media/${exercise.id}/',
+        ),
+      )) {
+        throw const FormatException(
+          'Los archivos del plan deben pertenecer al ID del ejercicio.',
+        );
+      }
+      for (final owner in exercises) {
+        for (final resource in owner.resources.where(
+          (resource) => resource.id == plan.resourceId,
+        )) {
+          if (owner.id != exercise.id) {
+            throw const FormatException(
+              'La secuencia ilustrada pertenece a otro ejercicio.',
+            );
+          }
+          plan.validateResource(resource);
+        }
+      }
     }
     return ExerciseCatalog._(
       json['catalogVersion'] as int,

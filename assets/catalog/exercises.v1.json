@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": 2,
+  "catalogVersion": 3,
   "exercises": [
     {
       "id": "squat",
@@ -101,6 +101,29 @@
         ],
         "stopSignals": [
           "Termina la serie si pierdes el equilibrio o ya no puedes mantener los talones apoyados."
+        ]
+      },
+      "illustrationPlan": {
+        "resourceId": "squat-illustration-sequence",
+        "phases": [
+          {
+            "id": "initial",
+            "title": "Posición inicial",
+            "description": "Guion previsto: persona de pie, con ambos pies apoyados y una separación cómoda.",
+            "expectedAssetPath": "assets/exercise_media/squat/01-inicial.png"
+          },
+          {
+            "id": "intermediate",
+            "title": "Fase intermedia",
+            "description": "Guion previsto: flexión de caderas y rodillas durante un descenso controlado.",
+            "expectedAssetPath": "assets/exercise_media/squat/02-intermedia.png"
+          },
+          {
+            "id": "final",
+            "title": "Posición final",
+            "description": "Guion previsto: punto inferior del descenso, con los talones apoyados y el tronco estable. El regreso de pie se explica en los pasos escritos.",
+            "expectedAssetPath": "assets/exercise_media/squat/03-final.png"
+          }
         ]
       }
     },
@@ -210,6 +233,29 @@
         ],
         "stopSignals": [
           "Apoya las rodillas y termina si las manos resbalan o el tronco cae sin control."
+        ]
+      },
+      "illustrationPlan": {
+        "resourceId": "pushup-illustration-sequence",
+        "phases": [
+          {
+            "id": "initial",
+            "title": "Posición inicial",
+            "description": "Guion previsto: apoyo de manos y pies, con brazos extendidos y el cuerpo alineado.",
+            "expectedAssetPath": "assets/exercise_media/pushup/01-inicial.png"
+          },
+          {
+            "id": "intermediate",
+            "title": "Fase intermedia",
+            "description": "Guion previsto: descenso del pecho mediante flexión de codos, conservando la alineación del tronco.",
+            "expectedAssetPath": "assets/exercise_media/pushup/02-intermedia.png"
+          },
+          {
+            "id": "final",
+            "title": "Posición final",
+            "description": "Guion previsto: punto inferior del descenso dentro de un recorrido controlado. El empuje de regreso se explica en los pasos escritos.",
+            "expectedAssetPath": "assets/exercise_media/pushup/03-final.png"
+          }
         ]
       }
     },
@@ -1130,8 +1176,8 @@
         ],
         "regressions": [
           {
-          "title": "Recorrido reducido con control",
-          "description": "Acorta ligeramente la subida solo si puedes entrar en la posición, sostenerte y bajar con seguridad. Si no puedes, compara las alternativas; no fuerces una repetición colgado."
+            "title": "Recorrido reducido con control",
+            "description": "Acorta ligeramente la subida solo si puedes entrar en la posición, sostenerte y bajar con seguridad. Si no puedes, compara las alternativas; no fuerces una repetición colgado."
           }
         ],
         "progressions": [
@@ -1655,6 +1701,29 @@
         ],
         "stopSignals": [
           "Termina si no puedes bajar las cargas sin balancearte o el agarre empieza a fallar."
+        ]
+      },
+      "illustrationPlan": {
+        "resourceId": "biceps-curl-illustration-sequence",
+        "phases": [
+          {
+            "id": "initial",
+            "title": "Posición inicial",
+            "description": "Guion previsto: persona de pie con una mancuerna a cada lado y las palmas hacia delante.",
+            "expectedAssetPath": "assets/exercise_media/biceps-curl/01-inicial.png"
+          },
+          {
+            "id": "intermediate",
+            "title": "Fase intermedia",
+            "description": "Guion previsto: flexión de codos con los brazos cerca del costado y el tronco estable.",
+            "expectedAssetPath": "assets/exercise_media/biceps-curl/02-intermedia.png"
+          },
+          {
+            "id": "final",
+            "title": "Posición final",
+            "description": "Guion previsto: extremo superior del curl antes de necesitar balancear el cuerpo. La bajada controlada se explica en los pasos escritos.",
+            "expectedAssetPath": "assets/exercise_media/biceps-curl/03-final.png"
+          }
         ]
       }
     },

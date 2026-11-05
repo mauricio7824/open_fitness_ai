@@ -9,6 +9,49 @@ import 'package:open_fitness_ai/core/models/exercise.dart';
 const fixtureImagePath = 'assets/exercise_media/test/start.png';
 const fixtureEndPath = 'assets/exercise_media/test/end.png';
 
+Map<String, dynamic> technicalReviewFixture() => {
+  'status': 'pending',
+  'updatedOn': '2026-11-04',
+  'reviewer': null,
+  'reviewedOn': null,
+  'notes':
+      'Registro técnico ficticio del test; no es una revisión profesional.',
+};
+
+Map<String, dynamic> plannedIllustrationFixture(String exerciseId) {
+  final json = catalogWithMedia([]);
+  final exercise = (json['exercises'] as List).firstWhere(
+    (e) => e['id'] == exerciseId,
+  );
+  final plan = exercise['illustrationPlan'];
+  return mediaFixture(id: plan['resourceId'], kind: 'imageSequence')
+    ..remove('assetPath')
+    ..['technicalReview'] = technicalReviewFixture()
+    ..['frames'] = [
+      for (final phase in plan['phases'])
+        {
+          'id': phase['id'],
+          'title': phase['title'],
+          'altText':
+              'Patrón sintético de prueba para ${phase['title']}; no representa un ejercicio.',
+          'assetPath': phase['expectedAssetPath'],
+        },
+    ];
+}
+
+ExerciseCatalog catalogWithPlannedResource(
+  String exerciseId,
+  Map<String, dynamic> resource,
+) {
+  final json = catalogWithMedia([]);
+  (json['exercises'] as List).firstWhere(
+    (e) => e['id'] == exerciseId,
+  )['resources'] = [
+    resource,
+  ];
+  return ExerciseCatalog.fromJson(json);
+}
+
 /// Deliberately fictitious metadata; never added to the application catalog.
 Map<String, dynamic> mediaFixture({
   String id = 'fixture-image',
